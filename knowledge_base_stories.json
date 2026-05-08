@@ -1,0 +1,359 @@
+[
+  {
+    "id": "SGC-US-001",
+    "texto": "Como líder de proyecto, quiero crear un nuevo proyecto ingresando nombre, cliente, fecha de inicio y fecha fin estimada, para que el equipo pueda comenzar a planificar las actividades del proyecto.",
+    "criterios": "GIVEN líder de proyecto autenticado en el módulo de gestión WHEN ingresa nombre (mínimo 5 caracteres, máximo 100), selecciona cliente de la lista, establece fecha inicio (no anterior a hoy) y fecha fin (posterior a fecha inicio) THEN el sistema crea el proyecto con estado 'Planificación', genera código único (PRY-YYYYMMDD-NNN) y muestra confirmación en menos de 2 segundos",
+    "dominio": "gestion_proyectos",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-002",
+    "texto": "Como desarrollador asignado a un proyecto, quiero registrar las horas trabajadas por tarea indicando fecha, cantidad de horas y descripción de la actividad realizada, para que el líder pueda hacer seguimiento del esfuerzo real versus el estimado.",
+    "criterios": "GIVEN desarrollador asignado a al menos una tarea activa WHEN selecciona tarea, ingresa fecha (no futura, no mayor a 7 días atrás), horas (mínimo 0.5, máximo 16, incrementos de 0.5) y descripción (mínimo 20 caracteres) THEN el sistema registra el tiempo, actualiza el total de horas de la tarea y recalcula el porcentaje de avance del proyecto",
+    "dominio": "seguimiento_tiempo",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-003",
+    "texto": "Como administrador del sistema, quiero gestionar los usuarios del sistema pudiendo crear, editar, desactivar y reactivar cuentas con roles específicos, para que solo personal autorizado tenga acceso a las funcionalidades correspondientes.",
+    "criterios": "GIVEN administrador autenticado con rol 'admin' WHEN crea usuario con email corporativo válido (@katary.co), nombre completo, y asigna uno o más roles (admin, líder, desarrollador, QA, cliente) THEN el sistema crea la cuenta con estado 'activo', envía email de bienvenida con contraseña temporal que expira en 24 horas, y registra la acción en el log de auditoría",
+    "dominio": "autenticacion",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-004",
+    "texto": "Como líder de proyecto, quiero asignar tareas a los miembros de mi equipo especificando título, descripción, prioridad, fecha límite y esfuerzo estimado, para que cada persona sepa qué debe hacer y cuándo debe entregarlo.",
+    "criterios": "GIVEN líder de proyecto con al menos un miembro en su equipo WHEN crea tarea con título (5-200 caracteres), descripción (mínimo 30 caracteres), prioridad (crítica/alta/media/baja), fecha límite (posterior a hoy, no mayor a fecha fin del proyecto), esfuerzo estimado (1-200 horas) y asigna a un miembro THEN el sistema crea la tarea con estado 'pendiente', notifica al miembro asignado por email y en el sistema, y actualiza el backlog del proyecto",
+    "dominio": "gestion_proyectos",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-005",
+    "texto": "Como gerente general, quiero ver un dashboard con indicadores clave de todos los proyectos activos incluyendo porcentaje de avance, estado de semáforo, horas consumidas versus presupuestadas y cantidad de tareas pendientes, para tomar decisiones informadas sobre la asignación de recursos.",
+    "criterios": "GIVEN gerente autenticado con rol 'gerencia' WHEN accede al dashboard ejecutivo THEN el sistema muestra en menos de 3 segundos: lista de proyectos activos con semáforo (verde: avance >= plan, amarillo: retraso < 10%, rojo: retraso >= 10%), gráfico de barras de horas consumidas vs presupuestadas por proyecto, tabla resumen con total de tareas (pendientes, en progreso, completadas) y filtros por cliente, líder y rango de fechas",
+    "dominio": "reportes",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-006",
+    "texto": "Como usuario del sistema, quiero iniciar sesión con mi email corporativo y contraseña, y que el sistema bloquee mi cuenta después de 5 intentos fallidos consecutivos, para proteger el acceso no autorizado a la información del proyecto.",
+    "criterios": "GIVEN usuario con cuenta activa y credenciales válidas WHEN ingresa email y contraseña correctos THEN el sistema inicia sesión, registra fecha/hora/IP en log de auditoría y redirige al dashboard en menos de 2 segundos. GIVEN usuario que ha fallado 4 intentos WHEN falla el quinto intento THEN el sistema bloquea la cuenta por 30 minutos, envía email de notificación al usuario y al administrador, y muestra mensaje 'Cuenta bloqueada temporalmente. Contacte al administrador o espere 30 minutos.'",
+    "dominio": "autenticacion",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-007",
+    "texto": "Como líder de proyecto, quiero generar un reporte semanal automático que incluya avance por tarea, horas registradas, riesgos identificados y tareas vencidas, para enviarlo al cliente y a la gerencia sin tener que compilar la información manualmente.",
+    "criterios": "GIVEN proyecto activo con al menos una tarea y un registro de horas WHEN el líder solicita reporte semanal (o se genera automáticamente cada lunes a las 7:00 AM) THEN el sistema genera PDF con: resumen ejecutivo, tabla de tareas (nombre, asignado, estado, % avance, horas), gráfico de burndown, lista de tareas vencidas en rojo, y sección de riesgos. El reporte se genera en menos de 10 segundos y se envía por email al líder, cliente y gerencia",
+    "dominio": "reportes",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-008",
+    "texto": "Como analista de calidad, quiero registrar defectos encontrados durante las pruebas especificando severidad, componente afectado, pasos para reproducir y evidencia, para que el equipo de desarrollo pueda corregirlos con toda la información necesaria.",
+    "criterios": "GIVEN analista QA asignado a un proyecto con casos de prueba WHEN registra defecto con título (10-200 caracteres), severidad (bloqueante/crítico/mayor/menor/trivial), componente afectado (selección de lista), pasos para reproducir (mínimo 3 pasos), resultado esperado, resultado obtenido y al menos una captura de pantalla THEN el sistema crea el defecto con estado 'nuevo', lo vincula al caso de prueba que falló, notifica al desarrollador asignado al componente y actualiza las métricas de calidad del proyecto",
+    "dominio": "calidad",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-009",
+    "texto": "Como desarrollador, quiero recibir notificaciones en tiempo real cuando me asignen una nueva tarea, cuando una tarea que depende de la mía se complete, o cuando un defecto sea reportado en mi componente, para poder reaccionar rápidamente sin tener que revisar el sistema constantemente.",
+    "criterios": "GIVEN desarrollador con sesión activa WHEN ocurre un evento relevante (asignación de tarea, completitud de dependencia, nuevo defecto en su componente) THEN el sistema envía notificación push en menos de 5 segundos y email en menos de 1 minuto. Las notificaciones incluyen: tipo de evento, enlace directo al recurso, nombre de quien generó el evento. El usuario puede configurar qué notificaciones recibir por cada canal (push/email/ambos/ninguno)",
+    "dominio": "notificaciones",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-010",
+    "texto": "Como líder de proyecto, quiero poder cambiar el estado de un proyecto siguiendo un flujo definido (Planificación → En Progreso → En Pausa → Completado → Cerrado), para que el sistema refleje el ciclo de vida real del proyecto y restrinja acciones según el estado.",
+    "criterios": "GIVEN proyecto en estado 'En Progreso' WHEN líder cambia estado a 'En Pausa' indicando motivo (mínimo 20 caracteres) THEN el sistema actualiza estado, congela fechas de tareas activas, notifica a todos los miembros y registra en historial con fecha/hora/usuario/motivo. GIVEN proyecto en estado 'Planificación' WHEN líder intenta cambiar a 'Cerrado' (saltando estados intermedios) THEN el sistema rechaza la transición y muestra los estados válidos siguientes",
+    "dominio": "gestion_proyectos",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-011",
+    "texto": "Como administrador, quiero configurar las competencias evaluables por proyecto y definir la escala de evaluación, para que las evaluaciones de desempeño trimestrales se ajusten a los objetivos específicos de cada proyecto y equipo.",
+    "criterios": "GIVEN administrador o líder con permiso de configuración WHEN define competencias para un proyecto seleccionando de catálogo (técnicas, blandas, liderazgo) o creando nuevas (nombre 5-100 chars, descripción, peso 1-100%), asigna escala (1-5 o 1-10) y establece peso por competencia (deben sumar 100%) THEN el sistema guarda la configuración, valida que los pesos sumen 100%, y la competencia queda disponible para las próximas evaluaciones trimestrales del equipo",
+    "dominio": "evaluacion_desempeno",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-012",
+    "texto": "Como cliente del proyecto, quiero acceder a un portal donde pueda ver el avance general de mi proyecto, los entregables completados, y dejar comentarios o aprobaciones sobre los entregables, para tener visibilidad y participar activamente en el proceso sin necesidad de reuniones presenciales.",
+    "criterios": "GIVEN cliente con cuenta activa y proyecto asignado WHEN accede al portal del cliente THEN ve: resumen de avance (% completado, semáforo), lista de entregables con estado (pendiente/en revisión/aprobado/rechazado), timeline del proyecto. GIVEN cliente visualizando un entregable en estado 'en revisión' WHEN agrega comentario (10-2000 caracteres) y selecciona 'Aprobar' o 'Solicitar cambios' THEN el sistema registra la acción, notifica al líder de proyecto en menos de 1 minuto, y actualiza el estado del entregable",
+    "dominio": "portal_cliente",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-013",
+    "texto": "Como analista de calidad, quiero generar una matriz de trazabilidad que vincule cada requerimiento con sus historias de usuario, casos de prueba y defectos asociados, para verificar que toda la funcionalidad solicitada está cubierta y probada.",
+    "criterios": "GIVEN proyecto con al menos 3 requerimientos documentados, historias de usuario vinculadas y casos de prueba creados WHEN el analista QA solicita la matriz de trazabilidad THEN el sistema genera en menos de 5 segundos una tabla con columnas: ID requerimiento, descripción, historias vinculadas, casos de prueba (total/pasados/fallidos), defectos abiertos, y cobertura (%). Los requerimientos sin cobertura completa se resaltan en amarillo. Los requerimientos sin ningún caso de prueba se resaltan en rojo",
+    "dominio": "calidad",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-014",
+    "texto": "Como usuario del sistema, quiero recuperar mi contraseña mediante un enlace enviado a mi email corporativo registrado, para poder acceder nuevamente al sistema sin depender del administrador.",
+    "criterios": "GIVEN usuario con cuenta activa WHEN solicita recuperación ingresando su email THEN el sistema envía enlace de recuperación al email registrado (válido por 1 hora, uso único), sin revelar si el email existe o no en el sistema (mensaje genérico: 'Si el email está registrado, recibirás instrucciones'). GIVEN usuario con enlace de recuperación válido WHEN establece nueva contraseña (mínimo 8 caracteres, 1 mayúscula, 1 minúscula, 1 número, 1 especial, diferente a las últimas 5 contraseñas) THEN el sistema actualiza la contraseña, invalida todas las sesiones activas, envía confirmación por email y registra en log de auditoría",
+    "dominio": "autenticacion",
+    "proyecto": "Katary360"
+  },
+  {
+    "id": "SGC-US-015",
+    "texto": "Como líder de proyecto, quiero registrar y hacer seguimiento de riesgos del proyecto indicando descripción, probabilidad, impacto, estrategia de mitigación y responsable, para gestionar proactivamente las amenazas al éxito del proyecto.",
+    "criterios": "GIVEN líder de proyecto activo WHEN registra riesgo con descripción (20-500 caracteres), probabilidad (alta/media/baja), impacto (alto/medio/bajo), categoría (técnico/organizacional/externo), estrategia de mitigación (20-1000 caracteres) y asigna responsable del equipo THEN el sistema calcula nivel de riesgo (probabilidad × impacto = crítico/significativo/moderado/bajo), lo agrega a la matriz de riesgos, programa revisión quincenal automática y notifica al responsable. Los riesgos críticos notifican adicionalmente a la gerencia",
+    "dominio": "gestion_riesgos",
+    "proyecto": "Katary360"
+  },
+
+  {
+    "id": "MED-US-001",
+    "texto": "Como médico tratante, quiero registrar la historia clínica de un paciente indicando diagnóstico, tratamiento prescrito, medicamentos y fecha de la consulta, para que quede un registro permanente y otros médicos puedan consultar el historial.",
+    "criterios": "GIVEN médico autenticado con rol 'médico' y paciente con cita activa WHEN ingresa diagnóstico CIE-10 (código válido), descripción del tratamiento (mínimo 30 caracteres), lista de medicamentos con dosis y frecuencia, y fecha de consulta (no futura) THEN el sistema guarda la historia clínica, la asocia al expediente del paciente, registra fecha/hora/médico y muestra confirmación en menos de 2 segundos",
+    "dominio": "historia_clinica",
+    "proyecto": "MediConnect"
+  },
+  {
+    "id": "MED-US-002",
+    "texto": "Como paciente, quiero agendar una cita médica seleccionando especialidad, médico y horario disponible, para que pueda recibir atención sin necesidad de llamar por teléfono.",
+    "criterios": "GIVEN paciente autenticado con perfil completo WHEN selecciona especialidad de la lista, elige médico disponible y selecciona un slot de la agenda (mínimo 24 horas de anticipación) THEN el sistema reserva la cita, envía confirmación por email y SMS con fecha, hora, médico y consultorio, y bloquea ese horario en la agenda del médico en menos de 3 segundos",
+    "dominio": "agendamiento",
+    "proyecto": "MediConnect"
+  },
+  {
+    "id": "MED-US-003",
+    "texto": "Como farmacéutico, quiero consultar las recetas médicas digitales de un paciente escaneando su documento de identidad, para validar que la receta es auténtica y dispensar los medicamentos correctos.",
+    "criterios": "GIVEN farmacéutico autenticado en el módulo de dispensación WHEN escanea el documento del paciente o ingresa su número de identificación THEN el sistema muestra las recetas activas (no vencidas, no dispensadas) con: nombre del médico, fecha de emisión, medicamentos con dosis, y código QR de validación. GIVEN receta ya dispensada WHEN farmacéutico intenta consultarla THEN el sistema muestra el estado 'Dispensada' con fecha y farmacia donde fue entregada",
+    "dominio": "farmacia",
+    "proyecto": "MediConnect"
+  },
+  {
+    "id": "MED-US-004",
+    "texto": "Como administrador del hospital, quiero generar un reporte mensual de ocupación de camas por área, tasa de reingresos y tiempo promedio de estancia, para presentarlo ante la junta directiva y tomar decisiones sobre la capacidad instalada.",
+    "criterios": "GIVEN administrador con rol 'dirección' WHEN solicita reporte mensual seleccionando mes y año THEN el sistema genera en menos de 15 segundos un PDF con: gráfico de ocupación por área (UCI, general, pediatría, etc.), tabla de reingresos (paciente, diagnóstico, días entre egreso y reingreso), tiempo promedio de estancia por diagnóstico, y comparativo con el mes anterior. El reporte se puede exportar también en formato Excel",
+    "dominio": "reportes",
+    "proyecto": "MediConnect"
+  },
+  {
+    "id": "MED-US-005",
+    "texto": "Como enfermera, quiero registrar la administración de medicamentos al paciente indicando medicamento, dosis, vía, hora y mi firma digital, para garantizar la trazabilidad del proceso y cumplir con los protocolos de seguridad del paciente.",
+    "criterios": "GIVEN enfermera autenticada con turno activo y paciente hospitalizado WHEN selecciona el medicamento de la orden médica, confirma dosis y vía, ingresa hora exacta de administración y firma digitalmente con su PIN THEN el sistema registra la administración en el kardex del paciente, actualiza el estado de la orden a 'administrado' y genera alerta si han transcurrido más de 30 minutos del horario programado sin registro",
+    "dominio": "administracion_medicamentos",
+    "proyecto": "MediConnect"
+  },
+
+  {
+    "id": "EDU-US-001",
+    "texto": "Como estudiante, quiero inscribirme a los cursos del siguiente semestre seleccionando materias de mi plan de estudios, para que el sistema registre oficialmente mi matrícula y pueda acceder al contenido académico.",
+    "criterios": "GIVEN estudiante autenticado con matrícula vigente y sin deudas pendientes WHEN selecciona materias disponibles para su semestre (mínimo 3, máximo 6 créditos según reglamento), verifica que no haya cruce de horarios y confirma la inscripción THEN el sistema registra la matrícula, genera comprobante en PDF con materias, horarios y docentes, y envía copia al correo institucional en menos de 5 segundos",
+    "dominio": "matricula",
+    "proyecto": "CampusDigital"
+  },
+  {
+    "id": "EDU-US-002",
+    "texto": "Como docente, quiero subir el material del curso (diapositivas, PDFs, videos y enlaces) organizados por semana de clase, para que los estudiantes puedan acceder al contenido antes y después de cada sesión.",
+    "criterios": "GIVEN docente autenticado con curso asignado en el semestre actual WHEN sube archivo (máximo 50MB por archivo, formatos: PDF, PPT, PPTX, MP4, DOC, DOCX) o agrega enlace externo, asigna semana y título descriptivo (mínimo 5 caracteres) THEN el sistema almacena el material, lo publica inmediatamente para los estudiantes inscritos, y notifica vía email a los estudiantes que hay nuevo contenido disponible",
+    "dominio": "contenido_academico",
+    "proyecto": "CampusDigital"
+  },
+  {
+    "id": "EDU-US-003",
+    "texto": "Como coordinador académico, quiero configurar el calendario de evaluaciones del semestre asignando fecha, hora, aula y modalidad para cada examen, para que estudiantes y docentes tengan visibilidad del cronograma con suficiente anticipación.",
+    "criterios": "GIVEN coordinador con rol 'coordinación' autenticado WHEN crea evaluación con materia (de lista de activas), fecha (dentro del semestre, mínimo 7 días de anticipación), hora inicio y fin, aula (de lista de disponibles), modalidad (presencial/virtual/híbrida) y porcentaje sobre la nota final (1-100%) THEN el sistema registra la evaluación, verifica que no haya conflicto de aulas en el mismo horario, y publica el evento en el calendario visible para todos los usuarios de la materia",
+    "dominio": "calendario_academico",
+    "proyecto": "CampusDigital"
+  },
+  {
+    "id": "EDU-US-004",
+    "texto": "Como estudiante, quiero consultar mis calificaciones de todas las materias del semestre actual y de semestres anteriores, para hacer seguimiento a mi rendimiento académico y verificar si califico para becas o distinciones.",
+    "criterios": "GIVEN estudiante autenticado WHEN accede a la sección de calificaciones y selecciona semestre THEN el sistema muestra tabla con materias, nota por corte, nota final, estado (aprobado/reprobado/en curso) y promedio acumulado. GIVEN estudiante que consulta semestres anteriores WHEN selecciona un período cerrado THEN el sistema muestra certificado digital de notas descargable en PDF con firma digital del registrador académico",
+    "dominio": "calificaciones",
+    "proyecto": "CampusDigital"
+  },
+  {
+    "id": "EDU-US-005",
+    "texto": "Como docente, quiero tomar asistencia de mis estudiantes al inicio de cada clase usando un código QR temporal que ellos escanean desde su celular, para evitar fraudes de asistencia y reducir el tiempo dedicado a este proceso.",
+    "criterios": "GIVEN docente autenticado con clase programada para el día actual WHEN genera código QR de asistencia (válido por 10 minutos, se invalida automáticamente) THEN el sistema activa el código y permite que los estudiantes inscritos lo escaneen. GIVEN estudiante que escanea el código dentro del tiempo válido WHEN el sistema valida su identidad THEN registra asistencia con hora exacta. GIVEN estudiante que intenta escanear código vencido THEN el sistema muestra 'Código expirado, comunícate con el docente' y no registra asistencia",
+    "dominio": "asistencia",
+    "proyecto": "CampusDigital"
+  },
+
+  {
+    "id": "INV-US-001",
+    "texto": "Como bodeguero, quiero registrar el ingreso de mercancía al inventario indicando producto, cantidad, proveedor, número de factura y fecha de vencimiento, para mantener actualizado el stock y garantizar la trazabilidad de cada lote.",
+    "criterios": "GIVEN bodeguero autenticado con rol 'almacén' WHEN ingresa producto (código de barras o búsqueda), cantidad (número entero positivo, máximo 9999 unidades por ingreso), selecciona proveedor de la lista, ingresa número de factura (único, alfanumérico) y fecha de vencimiento si aplica THEN el sistema actualiza el stock, crea un lote con código único (LOT-YYYYMMDD-NNN), registra el movimiento en el kardex y muestra el nuevo saldo disponible",
+    "dominio": "inventario",
+    "proyecto": "StockControl Pro"
+  },
+  {
+    "id": "INV-US-002",
+    "texto": "Como gerente de compras, quiero que el sistema me notifique automáticamente cuando un producto alcance su punto de reorden, para generar órdenes de compra a tiempo y evitar rupturas de stock.",
+    "criterios": "GIVEN producto con punto de reorden configurado WHEN el stock disponible cae por debajo del punto de reorden al registrar una salida THEN el sistema envía notificación push y email al gerente de compras con: nombre del producto, stock actual, punto de reorden, proveedor sugerido y cantidad a pedir según la última orden. La notificación se envía en menos de 1 minuto y genera una tarea en la lista de pendientes del gerente",
+    "dominio": "alertas_stock",
+    "proyecto": "StockControl Pro"
+  },
+  {
+    "id": "INV-US-003",
+    "texto": "Como cajero, quiero registrar la salida de productos por venta escaneando el código de barras, para que el inventario se descuente automáticamente y el sistema emita el comprobante de venta.",
+    "criterios": "GIVEN cajero autenticado con caja abierta WHEN escanea código de barras o busca producto por nombre y confirma cantidad a vender THEN el sistema verifica que haya stock suficiente, descuenta la cantidad del lote más antiguo (FIFO), registra el movimiento de salida con fecha/hora/cajero, actualiza el stock en tiempo real y genera comprobante de venta numerado. GIVEN producto sin stock WHEN cajero intenta registrar la venta THEN el sistema muestra alerta 'Producto sin stock disponible' y no permite continuar la transacción",
+    "dominio": "ventas",
+    "proyecto": "StockControl Pro"
+  },
+  {
+    "id": "INV-US-004",
+    "texto": "Como auditor interno, quiero realizar un conteo físico del inventario comparando las cantidades físicas con las del sistema, para identificar diferencias, registrar ajustes y generar el acta de inventario.",
+    "criterios": "GIVEN auditor con rol 'auditoría' autenticado WHEN crea conteo físico seleccionando bodega y categoría de productos THEN el sistema genera planilla de conteo con productos y columna en blanco para cantidad física. GIVEN auditor que ingresa cantidades físicas contadas WHEN finaliza el conteo THEN el sistema compara contra stock del sistema, resalta diferencias (faltantes en rojo, sobrantes en verde), permite ingresar justificación por diferencia (mínimo 10 caracteres) y genera acta en PDF con firma digital del auditor y aprobación del gerente",
+    "dominio": "auditoria_inventario",
+    "proyecto": "StockControl Pro"
+  },
+  {
+    "id": "INV-US-005",
+    "texto": "Como gerente general, quiero ver un reporte de rotación de inventario por categoría que muestre los productos más vendidos, los de menor movimiento y el valor total del stock, para tomar decisiones sobre qué productos descontinuar o reforzar.",
+    "criterios": "GIVEN gerente autenticado con rol 'gerencia' WHEN solicita reporte de rotación seleccionando período (semana/mes/trimestre/año) THEN el sistema genera en menos de 10 segundos: ranking top 10 productos más vendidos con gráfico de barras, lista de productos sin movimiento en el período resaltados en amarillo, valor total del inventario por categoría en tabla y gráfico de torta, e índice de rotación (unidades vendidas / stock promedio) por producto. Exportable en PDF y Excel",
+    "dominio": "reportes",
+    "proyecto": "StockControl Pro"
+  },
+
+  {
+    "id": "RES-US-001",
+    "texto": "Como mesero, quiero tomar el pedido de una mesa desde una tablet ingresando los platos y bebidas que el cliente solicita, para que la orden llegue automáticamente a cocina y bar sin tener que ir físicamente.",
+    "criterios": "GIVEN mesero autenticado con mesa activa asignada WHEN selecciona productos del menú digital (con foto, descripción y precio), agrega notas especiales por ítem (máximo 100 caracteres) y confirma el pedido THEN el sistema envía la orden a cocina (platos) y bar (bebidas) simultáneamente, muestra en ambas estaciones con número de mesa, hora de pedido y tiempo estimado de preparación, y registra el pedido en la cuenta de la mesa en menos de 2 segundos",
+    "dominio": "pedidos",
+    "proyecto": "RestaurantOS"
+  },
+  {
+    "id": "RES-US-002",
+    "texto": "Como cocinero, quiero visualizar en una pantalla los pedidos pendientes ordenados por hora de llegada, con su tiempo de espera acumulado, para priorizar la preparación y evitar que los clientes esperen demasiado.",
+    "criterios": "GIVEN cocinero con sesión activa en la pantalla de cocina WHEN hay pedidos pendientes THEN el sistema muestra lista actualizada en tiempo real con: número de mesa, lista de platos, hora de llegada y tiempo transcurrido (en minutos). Los pedidos que superan 15 minutos de espera se resaltan en amarillo y los que superan 25 minutos en rojo. GIVEN cocinero que marca un plato como listo WHEN confirma la acción THEN el sistema notifica al mesero asignado a esa mesa y actualiza el estado del ítem",
+    "dominio": "cocina",
+    "proyecto": "RestaurantOS"
+  },
+  {
+    "id": "RES-US-003",
+    "texto": "Como administrador del restaurante, quiero gestionar el menú digital pudiendo crear, editar, desactivar y cambiar el precio de los platos, para que los cambios se reflejen inmediatamente en las tablets de los meseros sin necesidad de reimprimir menús.",
+    "criterios": "GIVEN administrador autenticado con rol 'admin' WHEN crea plato con nombre (5-100 caracteres), descripción (10-300 caracteres), categoría (entrada/plato principal/postre/bebida), precio (número positivo con máximo 2 decimales) y al menos una foto (JPG/PNG, máximo 2MB) THEN el sistema publica el plato inmediatamente en el menú digital de todas las tablets activas, lo agrega al catálogo de reportes de ventas y confirma la operación en menos de 3 segundos. GIVEN administrador que desactiva un plato WHEN confirma la acción THEN el plato desaparece del menú digital pero se conserva en el histórico de ventas",
+    "dominio": "menu",
+    "proyecto": "RestaurantOS"
+  },
+  {
+    "id": "RES-US-004",
+    "texto": "Como cajero, quiero cerrar la cuenta de una mesa generando la factura con todos los ítems consumidos, aplicar descuentos autorizados o dividir la cuenta entre varios clientes, para procesar el pago de manera rápida y precisa.",
+    "criterios": "GIVEN cajero autenticado con mesa con pedidos completados WHEN solicita el cierre de cuenta THEN el sistema muestra resumen con todos los ítems, subtotal, impuestos (IVA 19%) y total. GIVEN cajero que aplica descuento WHEN ingresa código de descuento válido o porcentaje con autorización de gerente THEN el sistema recalcula el total y registra el descuento con el autorizador. GIVEN cliente que solicita dividir la cuenta WHEN cajero selecciona la opción de división THEN el sistema permite asignar ítems a cada persona o dividir el total equitativamente y genera una factura por cada parte",
+    "dominio": "facturacion",
+    "proyecto": "RestaurantOS"
+  },
+  {
+    "id": "RES-US-005",
+    "texto": "Como gerente del restaurante, quiero ver en tiempo real cuántas mesas están ocupadas, disponibles o en proceso de limpieza, y cuánto tiempo lleva ocupada cada mesa, para optimizar la rotación y tomar decisiones sobre las reservas.",
+    "criterios": "GIVEN gerente autenticado WHEN accede al mapa de mesas THEN el sistema muestra representación visual del salón con cada mesa en su estado: verde (disponible), amarillo (ocupada con tiempo de estancia), rojo (espera factura), gris (en limpieza). GIVEN mesa ocupada que supera el tiempo promedio de estancia configurado WHEN el gerente consulta el detalle THEN el sistema muestra: hora de llegada, tiempo transcurrido, consumo actual y mesero responsable. El mapa se actualiza automáticamente cada 30 segundos sin necesidad de recargar la página",
+    "dominio": "gestion_mesas",
+    "proyecto": "RestaurantOS"
+  },
+
+  {
+    "id": "HR-US-001",
+    "texto": "Como empleado, quiero solicitar vacaciones indicando las fechas de inicio y fin, para que mi jefe inmediato las apruebe o rechace y el sistema descuente los días del saldo disponible.",
+    "criterios": "GIVEN empleado autenticado con saldo de vacaciones mayor a cero WHEN ingresa fecha inicio (mínimo 15 días de anticipación), fecha fin (no mayor a 30 días continuos), y descripción opcional (máximo 200 caracteres) THEN el sistema calcula los días hábiles a descontar, verifica que el saldo sea suficiente, envía solicitud al jefe inmediato con notificación push y email, y cambia el estado de la solicitud a 'Pendiente de aprobación'. GIVEN jefe que aprueba la solicitud THEN el sistema descuenta los días del saldo, notifica al empleado y bloquea el período en el calendario del equipo",
+    "dominio": "vacaciones",
+    "proyecto": "TalentHub"
+  },
+  {
+    "id": "HR-US-002",
+    "texto": "Como director de recursos humanos, quiero generar la nómina mensual de todos los empleados activos calculando automáticamente salario base, horas extra, deducciones de ley y bonificaciones, para que el área contable pueda procesarla sin cálculos manuales.",
+    "criterios": "GIVEN director de RR.HH. autenticado WHEN inicia el proceso de nómina para el período seleccionado (mes y año) y confirma la generación THEN el sistema calcula para cada empleado: salario proporcional a días laborados, horas extra (con recargo del 25% diurnas, 75% nocturnas), descuentos de salud (4%) y pensión (4%), retención en la fuente según tabla vigente, y bonificaciones registradas. Genera liquidación preliminar en Excel para revisión antes de aprobar el pago definitivo",
+    "dominio": "nomina",
+    "proyecto": "TalentHub"
+  },
+  {
+    "id": "HR-US-003",
+    "texto": "Como jefe de área, quiero realizar la evaluación de desempeño semestral de mis colaboradores calificando competencias, logros y áreas de mejora, para que el resultado quede registrado y sirva como insumo para decisiones de promoción o planes de carrera.",
+    "criterios": "GIVEN jefe con rol 'liderazgo' en período de evaluaciones habilitado WHEN accede a la evaluación de un colaborador y califica cada competencia en escala 1-5 (con comentario obligatorio para notas menores a 3), registra logros del período (máximo 5, mínimo 10 caracteres cada uno) y áreas de mejora (máximo 3) THEN el sistema calcula la nota final ponderada, guarda la evaluación, notifica al colaborador para que la revise y firme digitalmente. GIVEN colaborador que no ha firmado en 5 días hábiles THEN el sistema envía recordatorio automático",
+    "dominio": "evaluacion_desempeno",
+    "proyecto": "TalentHub"
+  },
+  {
+    "id": "HR-US-004",
+    "texto": "Como reclutador, quiero publicar una oferta laboral en el portal de empleo interno indicando cargo, requisitos, salario y fecha límite de postulación, para que los empleados interesados puedan aplicar y los candidatos externos la encuentren en las bolsas de empleo.",
+    "criterios": "GIVEN reclutador autenticado con rol 'selección' WHEN crea oferta con cargo (5-100 caracteres), descripción de funciones (mínimo 100 caracteres), requisitos (nivel educativo, experiencia mínima, conocimientos técnicos), rango salarial (opcional), modalidad (presencial/remoto/híbrido) y fecha límite (mínimo 7 días desde hoy) THEN el sistema publica la oferta en el portal interno, la sincroniza con las bolsas de empleo configuradas (LinkedIn, Computrabajo) en menos de 5 minutos, y envía notificación a todos los empleados activos por correo",
+    "dominio": "reclutamiento",
+    "proyecto": "TalentHub"
+  },
+  {
+    "id": "HR-US-005",
+    "texto": "Como empleado, quiero registrar mi entrada y salida marcando con mi huella dactilar o carnet de proximidad, para que el sistema calcule automáticamente mis horas trabajadas, tardanzas y ausentismos.",
+    "criterios": "GIVEN empleado con turno asignado para el día WHEN registra entrada por huella o carnet antes del fin de su ventana de tolerancia (10 minutos después de la hora de inicio del turno) THEN el sistema registra la marca con hora exacta, calcula si es a tiempo o tardanza, y muestra confirmación en la pantalla del lector. GIVEN empleado que registra entrada fuera de la ventana de tolerancia THEN el sistema registra la tardanza con el tiempo de retraso, notifica al jefe inmediato y descuenta la fracción según la política de la empresa",
+    "dominio": "control_asistencia",
+    "proyecto": "TalentHub"
+  },
+
+  {
+    "id": "BANK-US-001",
+    "texto": "Como cliente bancario, quiero transferir dinero a otras cuentas del mismo banco o de otros bancos indicando el monto, la cuenta destino y un concepto, para mover mis fondos de forma inmediata desde la aplicación móvil sin ir a una sucursal.",
+    "criterios": "GIVEN cliente autenticado con saldo suficiente WHEN ingresa número de cuenta destino (válido, activo), monto (mayor a $0, no superior al saldo disponible ni al límite diario configurado), concepto (5-100 caracteres) y confirma con su clave de transacciones o biometría THEN el sistema procesa la transferencia en menos de 5 segundos, debita el monto de la cuenta origen, acredita en la cuenta destino, envía comprobante por email y notificación push a ambas partes. GIVEN transferencia interbancaria THEN el sistema enruta por ACH y confirma la acreditación en la cuenta destino en máximo 2 horas hábiles",
+    "dominio": "transferencias",
+    "proyecto": "BancoDigital App"
+  },
+  {
+    "id": "BANK-US-002",
+    "texto": "Como cliente bancario, quiero consultar el historial de movimientos de mis cuentas con filtros por fecha, tipo de transacción y monto, para revisar mis gastos y detectar cobros no reconocidos.",
+    "criterios": "GIVEN cliente autenticado WHEN accede al historial de una cuenta y aplica filtros opcionales (fecha inicio, fecha fin, tipo: débito/crédito/transferencia, monto mínimo, monto máximo) THEN el sistema muestra lista paginada (máximo 50 registros por página) con: fecha, descripción, referencia, monto y saldo resultante, ordenada de más reciente a más antigua. El resultado se carga en menos de 3 segundos. El cliente puede exportar los movimientos filtrados en PDF o CSV para el período seleccionado (máximo 12 meses)",
+    "dominio": "consultas",
+    "proyecto": "BancoDigital App"
+  },
+  {
+    "id": "BANK-US-003",
+    "texto": "Como oficial de crédito, quiero evaluar una solicitud de crédito personal consultando el score crediticio del cliente, su historial de pagos interno y su capacidad de endeudamiento, para aprobar o rechazar la solicitud con sustento técnico en menos de un día hábil.",
+    "criterios": "GIVEN oficial de crédito autenticado con rol 'crédito' WHEN consulta solicitud de crédito THEN el sistema muestra: datos del cliente, score crediticio (consultado en tiempo real a la central de riesgo), historial de productos del banco (últimos 24 meses), ingresos declarados, deudas vigentes y capacidad de pago calculada (ingresos × 30% - cuotas actuales). El oficial puede aprobar, rechazar o solicitar documentación adicional, y el sistema registra la decisión con justificación en el expediente del cliente",
+    "dominio": "credito",
+    "proyecto": "BancoDigital App"
+  },
+  {
+    "id": "BANK-US-004",
+    "texto": "Como cliente, quiero bloquear temporalmente mi tarjeta de crédito o débito desde la aplicación en caso de pérdida o robo, para evitar transacciones no autorizadas mientras gestiono el reemplazo.",
+    "criterios": "GIVEN cliente autenticado con tarjeta activa WHEN selecciona la tarjeta y activa el bloqueo temporal confirmando con su PIN de seguridad THEN el sistema bloquea la tarjeta en menos de 10 segundos, rechaza cualquier intento de transacción posterior, envía notificación push y SMS de confirmación, y muestra la opción de desbloquear o solicitar reposición. GIVEN cliente que intenta desbloquear WHEN confirma su identidad con clave y código OTP THEN el sistema reactiva la tarjeta y registra el evento en el log de seguridad con fecha/hora/IP",
+    "dominio": "seguridad_tarjetas",
+    "proyecto": "BancoDigital App"
+  },
+  {
+    "id": "BANK-US-005",
+    "texto": "Como analista de riesgos, quiero que el sistema detecte automáticamente transacciones sospechosas según patrones de fraude conocidos y las escale para revisión manual, para reducir el tiempo de respuesta ante potenciales fraudes.",
+    "criterios": "GIVEN sistema de monitoreo activo WHEN se procesa una transacción que activa una o más reglas de fraude (monto inusual para el perfil del cliente, ubicación geográfica atípica, múltiples transacciones en corto tiempo, uso en horario no habitual) THEN el sistema asigna un puntaje de riesgo (0-100), si el puntaje supera 70 bloquea preventivamente la transacción y notifica al cliente en menos de 30 segundos para confirmación; si supera 90 bloquea y escala automáticamente al equipo de fraudes con todos los detalles del evento",
+    "dominio": "prevencion_fraude",
+    "proyecto": "BancoDigital App"
+  },
+
+  {
+    "id": "LOG-US-001",
+    "texto": "Como operador logístico, quiero registrar el despacho de un pedido indicando transportista, placa del vehículo, guía de remisión y fecha y hora estimada de entrega, para que el cliente pueda hacer seguimiento en tiempo real de su envío.",
+    "criterios": "GIVEN operador autenticado con pedido en estado 'listo para despacho' WHEN selecciona el pedido, asigna transportista de la lista, ingresa placa del vehículo (formato válido), número de guía de remisión y fecha/hora estimada de entrega THEN el sistema cambia el estado del pedido a 'En tránsito', genera código de rastreo único, notifica al cliente por email y SMS con enlace de seguimiento, y registra el movimiento en el historial del pedido",
+    "dominio": "despachos",
+    "proyecto": "LogiTrack"
+  },
+  {
+    "id": "LOG-US-002",
+    "texto": "Como cliente final, quiero rastrear mi pedido en tiempo real usando el código de seguimiento que me enviaron, para saber exactamente dónde está mi envío y cuándo llegará sin tener que llamar al servicio al cliente.",
+    "criterios": "GIVEN cualquier usuario (sin necesidad de autenticación) WHEN ingresa el código de rastreo en la página pública de seguimiento THEN el sistema muestra: estado actual del envío, última ubicación registrada en mapa, historial de eventos (recepción, despacho, en tránsito, en ciudad destino, en reparto, entregado) con fecha y hora de cada uno, y fecha estimada de entrega actualizada. La página se actualiza automáticamente cada 5 minutos. Si el código no existe o el envío ya fue entregado hace más de 30 días, muestra mensaje informativo",
+    "dominio": "rastreo",
+    "proyecto": "LogiTrack"
+  },
+  {
+    "id": "LOG-US-003",
+    "texto": "Como conductor de reparto, quiero registrar la entrega de un paquete capturando la firma digital del receptor y una foto del paquete entregado, para que quede constancia del cumplimiento y protegerme ante posibles reclamos.",
+    "criterios": "GIVEN conductor autenticado en app móvil con pedido asignado para entrega WHEN llega a la dirección, el receptor firma en la pantalla táctil (firma de mínimo 3 trazos) y el conductor toma foto del paquete y del entorno THEN el sistema registra la entrega con: firma, foto, coordenadas GPS del lugar, fecha y hora exacta, nombre del receptor declarado por el conductor, actualiza el estado a 'Entregado' y notifica al cliente y al operador logístico en menos de 1 minuto",
+    "dominio": "entregas",
+    "proyecto": "LogiTrack"
+  },
+  {
+    "id": "LOG-US-004",
+    "texto": "Como gerente de operaciones, quiero ver el rendimiento de cada conductor en términos de entregas realizadas, tiempo promedio por entrega, tasa de entregas exitosas al primer intento y novedades reportadas, para evaluar el desempeño y optimizar las rutas.",
+    "criterios": "GIVEN gerente autenticado con rol 'operaciones' WHEN accede al reporte de rendimiento de conductores y selecciona período (día/semana/mes) THEN el sistema muestra tabla con: conductor, entregas asignadas, entregas exitosas, tasa de éxito al primer intento (%), tiempo promedio de entrega, kilómetros recorridos, novedades reportadas. Permite ordenar por cualquier columna y exportar en Excel. Los conductores con tasa de éxito menor al 85% se resaltan en rojo",
+    "dominio": "reportes",
+    "proyecto": "LogiTrack"
+  },
+  {
+    "id": "LOG-US-005",
+    "texto": "Como operador logístico, quiero registrar una novedad en un pedido (dirección incorrecta, cliente ausente, paquete dañado) con foto y descripción, para escalar el caso al área de servicio al cliente y definir el siguiente paso.",
+    "criterios": "GIVEN conductor o operador autenticado con pedido en estado 'En reparto' WHEN registra novedad seleccionando tipo (dirección incorrecta/cliente ausente/paquete dañado/rechazo del cliente/dirección no encontrada), agrega descripción (mínimo 20 caracteres) y al menos una foto como evidencia THEN el sistema cambia el estado del pedido a 'Con novedad', notifica al área de servicio al cliente con todos los detalles, envía SMS al cliente informando la novedad y la necesidad de contacto, y registra el evento en el historial del pedido con timestamp",
+    "dominio": "novedades",
+    "proyecto": "LogiTrack"
+  }
+]

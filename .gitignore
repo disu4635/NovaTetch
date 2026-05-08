@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+.env
+*.env
+!*.env.example
+
+# SQLite / bases de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# ChromaDB / vectorstore
+chroma_db/
+.chroma/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/build/
+.npm/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Secrets / credenciales
+*.pem
+*.key
+*.cert
+secrets/
