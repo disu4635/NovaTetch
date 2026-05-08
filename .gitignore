@@ -33,6 +33,7 @@ frontend/build/
 
 # IDEs
 .vscode/
+.claude/
 .idea/
 *.swp
 *.swo
