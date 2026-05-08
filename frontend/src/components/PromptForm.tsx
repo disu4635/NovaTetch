@@ -23,7 +23,7 @@ export default function PromptForm({ onAnalyze, loading }: Props) {
       <button
         type="submit"
         disabled={loading}
-        className="self-end flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="cursor-pointer self-end flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         {loading ? (
           <>

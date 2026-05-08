@@ -43,10 +43,12 @@ from pydantic import ValidationError
 from sentence_transformers import SentenceTransformer
 import chromadb
 
-from src.ambiguity_detector import AmbiguityDetector
+# Asegurar que la raíz del proyecto esté en sys.path para importar src/
+_BASE_DIR = Path(__file__).parent
+if str(_BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(_BASE_DIR))
 
-# Importar Contract A
-sys.path.insert(0, str(Path(__file__).parent))
+from src.ambiguity_detector import AmbiguityDetector
 from src.contract_a import (
     AcceptanceCriterion,
     AmbiguityResolution,
@@ -133,9 +135,9 @@ class RequirementsRefinerAgent:
 
         # Paths por defecto
         base_dir = Path(__file__).parent
-        self.kb_path = kb_path or str(base_dir / "knowledge_base_data")
+        self.kb_path = kb_path or str(base_dir / "knowledge_base_data_multilingual")
         self.stories_path = stories_path or str(
-            base_dir / "examples" / "knowledge_base" / "katary_stories.json"
+            base_dir / "knowledge_base_stories.json"
         )
 
         # Inicializar componentes

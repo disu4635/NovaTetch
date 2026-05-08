@@ -10,6 +10,7 @@ export interface Ambiguity {
 
 export interface Resolution {
   word: string
+  category: string
   analyst_resolution: string
   status: 'resolved' | 'dismissed'
 }

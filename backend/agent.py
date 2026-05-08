@@ -1,4 +1,4 @@
-"""Web-friendly wrapper around qualityai-modulo1's RequirementsRefinerAgent.
+"""Web-friendly wrapper for the RequirementsRefinerAgent.
 
 Replaces the interactive console HITL with a two-step API:
   1. analyze(prompt)  → returns detected ambiguities
@@ -14,10 +14,10 @@ from pathlib import Path
 
 warnings.filterwarnings("ignore")
 
-# Make qualityai-modulo1 importable
-QUALITYAI_PATH = Path(__file__).parent.parent.parent / "qualityai-modulo1"
-if str(QUALITYAI_PATH) not in sys.path:
-    sys.path.insert(0, str(QUALITYAI_PATH))
+# Add NovaTetch root to sys.path so src/ is importable
+NOVATECH_PATH = Path(__file__).parent.parent
+if str(NOVATECH_PATH) not in sys.path:
+    sys.path.insert(0, str(NOVATECH_PATH))
 
 from dotenv import load_dotenv
 from groq import Groq
@@ -86,8 +86,8 @@ class WebAgent:
         self.groq_client = Groq(api_key=groq_api_key)
         self.ambiguity_detector = AmbiguityDetector()
 
-        kb_data_path = str(QUALITYAI_PATH / "knowledge_base_data_multilingual")
-        stories_path = str(QUALITYAI_PATH / "examples" / "knowledge_base" / "katary_stories.json")
+        kb_data_path = str(NOVATECH_PATH / "knowledge_base_data_multilingual")
+        stories_path = str(NOVATECH_PATH / "knowledge_base_stories.json")
 
         self._init_embeddings()
         self._init_chromadb(kb_data_path, stories_path)

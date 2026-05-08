@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Cpu, Plus } from 'lucide-react'
 import { api } from './api/client'
 import type { Ambiguity, Resolution, RunDetail, RunSummary } from './types'
 import PromptForm from './components/PromptForm'
@@ -75,38 +76,42 @@ export default function App() {
     setError(null)
   }
 
+  const handleDelete = async (runId: string) => {
+    try {
+      await api.deleteRun(runId)
+      setRuns(prev => prev.filter(r => r.run_id !== runId))
+    } catch {
+      // si falla silenciosamente, el item permanece en la lista
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex flex-col items-center">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="w-full border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-10">
+        <div className="max-w-5xl mx-auto w-full px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded-lg bg-violet-600 flex items-center justify-center">
-              <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-              </svg>
+              <Cpu className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-white leading-none">QualityAI</h1>
+              <h1 className="text-base font-bold text-white leading-none">NovaTetch</h1>
               <p className="text-xs text-slate-400">Requirements Refiner</p>
             </div>
           </div>
           {phase !== 'idle' && (
             <button
               onClick={handleReset}
-              className="text-sm text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1"
+              className="cursor-pointer text-sm text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1"
             >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
+              <Plus className="h-4 w-4" />
               Nuevo análisis
             </button>
           )}
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-6 py-10 flex flex-col gap-10">
+      <main className="flex-1 w-full max-w-5xl mx-auto px-6 py-10 flex flex-col gap-10">
         {/* Hero */}
         {phase === 'idle' && (
           <div className="text-center mb-2">
@@ -157,7 +162,7 @@ export default function App() {
             <p className="text-red-400 text-sm">{error}</p>
             <button
               onClick={handleReset}
-              className="mt-4 rounded-lg bg-red-500/20 px-4 py-2 text-sm text-red-300 hover:bg-red-500/30 transition-colors"
+              className="cursor-pointer mt-4 rounded-lg bg-red-500/20 px-4 py-2 text-sm text-red-300 hover:bg-red-500/30 transition-colors"
             >
               Intentar de nuevo
             </button>
@@ -168,7 +173,7 @@ export default function App() {
         {phase === 'done' && run?.result && (
           <section className="flex flex-col gap-6">
             {/* Stats bar */}
-            <div className="rounded-2xl border border-slate-700 bg-slate-800/40 p-5 flex flex-wrap gap-6">
+            <div className="rounded-2xl border border-slate-700 bg-slate-800/40 px-6 py-5 flex flex-wrap gap-8">
               <div>
                 <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Historias</p>
                 <p className="text-2xl font-bold text-white">{run.result.user_stories.length}</p>
@@ -188,7 +193,7 @@ export default function App() {
                 <p className="text-2xl font-bold text-white">{run.result.total_assumptions_made}</p>
               </div>
               <div className="ml-auto text-right">
-                <p className="text-xs text-slate-500 mb-1">Run ID</p>
+                <p className="text-xs text-slate-500 mb-1">ID de ejecución</p>
                 <p className="font-mono text-xs text-violet-400">{run.run_id}</p>
               </div>
             </div>
@@ -212,7 +217,7 @@ export default function App() {
 
         {/* History */}
         {phase === 'idle' && runs.length > 0 && (
-          <RunHistory runs={runs} onSelect={handleSelectRun} />
+          <RunHistory runs={runs} onSelect={handleSelectRun} onDelete={handleDelete} />
         )}
       </main>
     </div>

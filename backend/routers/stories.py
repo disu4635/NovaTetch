@@ -34,6 +34,7 @@ class AnalyzeResponse(BaseModel):
 
 class Resolution(BaseModel):
     word: str
+    category: str = ''
     analyst_resolution: str
     status: str  # "resolved" | "dismissed"
 
@@ -127,6 +128,15 @@ def list_runs(db: Session = Depends(get_db)):
             story_count=story_count,
         ))
     return result
+
+
+@router.delete("/runs/{run_id}", status_code=204)
+def delete_run(run_id: str, db: Session = Depends(get_db)):
+    record = db.query(RunRecord).filter(RunRecord.run_id == run_id).first()
+    if not record:
+        raise HTTPException(status_code=404, detail="Run not found")
+    db.delete(record)
+    db.commit()
 
 
 @router.get("/runs/{run_id}", response_model=RunDetail)

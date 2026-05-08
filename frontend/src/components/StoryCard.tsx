@@ -7,16 +7,16 @@ interface Props {
 }
 
 const priorityConfig = {
-  critical: 'bg-red-500/20 text-red-300 border-red-500/30',
-  high: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
-  medium: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-  low: 'bg-slate-500/20 text-slate-300 border-slate-500/30',
+  critical: { color: 'bg-red-500/20 text-red-300 border-red-500/30', label: 'Crítica' },
+  high:     { color: 'bg-orange-500/20 text-orange-300 border-orange-500/30', label: 'Alta' },
+  medium:   { color: 'bg-amber-500/20 text-amber-300 border-amber-500/30', label: 'Media' },
+  low:      { color: 'bg-slate-500/20 text-slate-300 border-slate-500/30', label: 'Baja' },
 }
 
 const typeConfig = {
-  functional: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-  non_functional: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-  technical: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+  functional:     { color: 'bg-blue-500/20 text-blue-300 border-blue-500/30', label: 'Funcional' },
+  non_functional: { color: 'bg-purple-500/20 text-purple-300 border-purple-500/30', label: 'No funcional' },
+  technical:      { color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30', label: 'Técnica' },
 }
 
 export default function StoryCard({ story, index }: Props) {
@@ -26,7 +26,7 @@ export default function StoryCard({ story, index }: Props) {
     <div className="rounded-2xl border border-slate-700 bg-slate-800/50 overflow-hidden">
       {/* Header */}
       <button
-        className="w-full flex items-center justify-between p-5 text-left hover:bg-slate-700/30 transition-colors"
+        className="cursor-pointer w-full flex items-center justify-between p-5 text-left hover:bg-slate-700/30 transition-colors"
         onClick={() => setOpen(o => !o)}
       >
         <div className="flex items-center gap-3 min-w-0">
@@ -36,11 +36,11 @@ export default function StoryCard({ story, index }: Props) {
           <span className="font-semibold text-slate-100 truncate">{story.title}</span>
         </div>
         <div className="flex items-center gap-2 ml-4 shrink-0">
-          <span className={`rounded-full px-2 py-0.5 text-xs font-medium border ${priorityConfig[story.priority]}`}>
-            {story.priority}
+          <span className={`rounded-full px-2 py-0.5 text-xs font-medium border ${priorityConfig[story.priority].color}`}>
+            {priorityConfig[story.priority].label}
           </span>
-          <span className={`rounded-full px-2 py-0.5 text-xs font-medium border ${typeConfig[story.story_type]}`}>
-            {story.story_type.replace('_', ' ')}
+          <span className={`rounded-full px-2 py-0.5 text-xs font-medium border ${typeConfig[story.story_type].color}`}>
+            {typeConfig[story.story_type].label}
           </span>
           <svg
             className={`h-4 w-4 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`}
@@ -52,7 +52,7 @@ export default function StoryCard({ story, index }: Props) {
       </button>
 
       {open && (
-        <div className="px-5 pb-6 flex flex-col gap-6">
+        <div className="px-6 pt-2 pb-6 flex flex-col gap-6">
           {/* Story narrative */}
           <div className="rounded-xl bg-slate-900/50 p-4 border border-slate-700/50">
             <div className="grid gap-2 text-sm">

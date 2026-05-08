@@ -31,10 +31,10 @@ export default function AmbiguityResolver({ ambiguities, onGenerate, loading }: 
     const resolutions: Resolution[] = ambiguities.map((amb, i) => {
       const s = states[i]
       if (s.choice === 'dismiss') {
-        return { word: amb.word, analyst_resolution: '', status: 'dismissed' }
+        return { word: amb.word, category: amb.category, analyst_resolution: '', status: 'dismissed' }
       }
       const text = s.choice === 'custom' ? s.custom.trim() : amb.suggestion
-      return { word: amb.word, analyst_resolution: text, status: 'resolved' }
+      return { word: amb.word, category: amb.category, analyst_resolution: text, status: 'resolved' }
     })
     onGenerate(resolutions)
   }
@@ -127,7 +127,7 @@ export default function AmbiguityResolver({ ambiguities, onGenerate, loading }: 
       <button
         onClick={handleGenerate}
         disabled={!allReady || loading}
-        className="self-end flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="cursor-pointer self-end flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         {loading ? (
           <>
