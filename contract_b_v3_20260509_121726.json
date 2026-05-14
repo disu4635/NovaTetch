@@ -1,0 +1,1401 @@
+{
+  "pipeline_run_id": "v3-711577a5",
+  "agent_name": "test_architect",
+  "agent_version": "0.3.0-v3-iso25010",
+  "created_at": "2026-05-09T12:17:26.870878",
+  "features": [
+    {
+      "name": "Inicio de sesión con credenciales correctas",
+      "description": "Como usuario, quiero iniciar sesión con mi email y contraseña, para pueda acceder a la tienda virtual de manera segura",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Inicio de sesión exitoso con credenciales válidas",
+          "scenario_type": "positive",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa y credenciales válidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email y contraseña correctos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema inicia sesión en menos de 2 segundos y redirige al dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña mínima de 8 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa y contraseña de 8 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email y contraseña correctos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema inicia sesión en menos de 2 segundos y redirige al dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña máxima de 32 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa y contraseña de 32 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email y contraseña correctos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema inicia sesión en menos de 2 segundos y redirige al dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña de 7 caracteres (invalida)",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa y contraseña de 7 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email y contraseña",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que la contraseña es demasiado corta",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña de 33 caracteres (invalida)",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa y contraseña de 33 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email y contraseña",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que la contraseña es demasiado larga",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido por email incorrecto",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@tag_seguridad",
+            "@tag_inicio_sesion",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email incorrecto y contraseña válida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error claro sin exponer información sensible",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido por contraseña incorrecta",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@tag_seguridad",
+            "@tag_inicio_sesion",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email válido y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error claro sin exponer información sensible",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido por email y contraseña incorrectos",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@tag_seguridad",
+            "@tag_inicio_sesion",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email incorrecto y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error claro sin exponer información sensible",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido por contraseña con menos de 8 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@tag_seguridad",
+            "@tag_inicio_sesion",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email válido y contraseña con menos de 8 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error claro sin exponer información sensible",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido por contraseña con más de 32 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@tag_seguridad",
+            "@tag_inicio_sesion",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email válido y contraseña con más de 32 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error claro sin exponer información sensible",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido por contraseña con exactamente 8 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@tag_seguridad",
+            "@tag_inicio_sesion",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email válido y contraseña con exactamente 8 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error claro sin exponer información sensible",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido por contraseña con exactamente 32 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@tag_seguridad",
+            "@tag_inicio_sesion",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa email válido y contraseña con exactamente 32 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error claro sin exponer información sensible",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        }
+      ],
+      "user_story_id": "US-001"
+    },
+    {
+      "name": "Bloqueo temporal de cuenta después de varios intentos fallidos",
+      "description": "Como usuario, quiero que mi cuenta sea bloqueada temporalmente después de varios intentos fallidos, para pueda proteger mi cuenta de accesos no autorizados",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Bloqueo temporal de cuenta después de 5 intentos fallidos consecutivos",
+          "scenario_type": "positive",
+          "quality_characteristic": "security",
+          "tags": [
+            "@bloqueo_temporal",
+            "@seguridad",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con cuenta activa y 5 intentos fallidos consecutivos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realiza el sexto intento fallido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema bloquea la cuenta por 30 minutos y muestra mensaje de error claro",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "No bloqueo temporal de cuenta después de 4 intentos fallidos consecutivos",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@bloqueo_temporal",
+            "@seguridad",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con cuenta activa y 4 intentos fallidos consecutivos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realiza el quinto intento fallido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema no bloquea la cuenta y muestra mensaje de error",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Bloqueo temporal de cuenta después de 6 intentos fallidos consecutivos",
+          "scenario_type": "positive",
+          "quality_characteristic": "security",
+          "tags": [
+            "@bloqueo_temporal",
+            "@seguridad",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con cuenta activa y 6 intentos fallidos consecutivos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realiza el séptimo intento fallido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema bloquea la cuenta por 30 minutos y muestra mensaje de error claro",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Bloqueo temporal de cuenta después de 5 intentos fallidos no consecutivos",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@bloqueo_temporal",
+            "@seguridad",
+            "@dt",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con cuenta activa y 5 intentos fallidos no consecutivos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realiza el sexto intento fallido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema no bloquea la cuenta y muestra mensaje de error",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Bloqueo temporal de cuenta después de 5 intentos fallidos consecutivos con mensaje de error claro",
+          "scenario_type": "positive",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@bloqueo_temporal",
+            "@usabilidad",
+            "@ep",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con cuenta activa y 5 intentos fallidos consecutivos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realiza el sexto intento fallido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema bloquea la cuenta por 30 minutos y muestra mensaje de error claro y conciso",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        }
+      ],
+      "user_story_id": "US-002"
+    },
+    {
+      "name": "Cierre de sesiones por inactividad",
+      "description": "Como usuario, quiero que mi sesión sea cerrada automáticamente después de un período de inactividad, para pueda proteger mi cuenta de accesos no autorizados",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Sesión cerrada después de 30 minutos de inactividad",
+          "scenario_type": "positive",
+          "quality_characteristic": "security",
+          "tags": [
+            "@inactividad",
+            "@seguridad",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con sesión activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "30 minutos de inactividad",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "no se registra actividad en la sesión",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema cierra la sesión y redirige al login",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Sesión no cerrada con menos de 30 minutos de inactividad",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@inactividad",
+            "@seguridad",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con sesión activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "20 minutos de inactividad",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "no se registra actividad en la sesión",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema no cierra la sesión",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Sesión no cerrada con más de 30 minutos de inactividad",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@inactividad",
+            "@seguridad",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con sesión activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "40 minutos de inactividad",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "no se registra actividad en la sesión",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema cierra la sesión y redirige al login",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Sesión cerrada con exactamente 30 minutos de inactividad",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@inactividad",
+            "@seguridad",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con sesión activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "exactamente 30 minutos de inactividad",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "no se registra actividad en la sesión",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema cierra la sesión y redirige al login",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Sesión cerrada con 1 minuto de inactividad después de 29 minutos de inactividad",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@inactividad",
+            "@seguridad",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "un usuario con sesión activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "29 minutos de inactividad",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "1 minuto de inactividad adicional",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "no se registra actividad en la sesión",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema cierra la sesión y redirige al login",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-003"
+        }
+      ],
+      "user_story_id": "US-003"
+    },
+    {
+      "name": "Rendimiento y escalabilidad",
+      "description": "Como usuario, quiero que el sistema responda rápidamente incluso con múltiples usuarios conectados, para pueda tener una experiencia de usuario fluida",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Rendimiento con 100 usuarios conectados",
+          "scenario_type": "positive",
+          "quality_characteristic": "performance_efficiency",
+          "tags": [
+            "@rendimiento",
+            "@escalabilidad",
+            "@ep",
+            "@iso-performance-efficiency"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "100 usuarios conectados simultáneamente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realizan acciones en el sistema",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema responde en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-004"
+        },
+        {
+          "name": "Rendimiento con 500 usuarios conectados",
+          "scenario_type": "positive",
+          "quality_characteristic": "performance_efficiency",
+          "tags": [
+            "@rendimiento",
+            "@escalabilidad",
+            "@ep",
+            "@iso-performance-efficiency"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "500 usuarios conectados simultáneamente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realizan acciones en el sistema",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema responde en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-004"
+        },
+        {
+          "name": "Rendimiento con 99 usuarios conectados",
+          "scenario_type": "boundary",
+          "quality_characteristic": "performance_efficiency",
+          "tags": [
+            "@rendimiento",
+            "@escalabilidad",
+            "@bva",
+            "@iso-performance-efficiency"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "99 usuarios conectados simultáneamente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realizan acciones en el sistema",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema responde en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-004"
+        },
+        {
+          "name": "Rendimiento con 101 usuarios conectados",
+          "scenario_type": "boundary",
+          "quality_characteristic": "performance_efficiency",
+          "tags": [
+            "@rendimiento",
+            "@escalabilidad",
+            "@bva",
+            "@iso-performance-efficiency"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "101 usuarios conectados simultáneamente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realizan acciones en el sistema",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema responde en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-004"
+        },
+        {
+          "name": "Rendimiento con 499 usuarios conectados",
+          "scenario_type": "boundary",
+          "quality_characteristic": "performance_efficiency",
+          "tags": [
+            "@rendimiento",
+            "@escalabilidad",
+            "@bva",
+            "@iso-performance-efficiency"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "499 usuarios conectados simultáneamente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realizan acciones en el sistema",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema responde en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-004"
+        },
+        {
+          "name": "Rendimiento con 501 usuarios conectados",
+          "scenario_type": "boundary",
+          "quality_characteristic": "performance_efficiency",
+          "tags": [
+            "@rendimiento",
+            "@escalabilidad",
+            "@bva",
+            "@iso-performance-efficiency"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "501 usuarios conectados simultáneamente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "realizan acciones en el sistema",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema responde en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-004"
+        }
+      ],
+      "user_story_id": "US-004"
+    },
+    {
+      "name": "Mensajes de error claros y seguros",
+      "description": "Como usuario, quiero que el sistema muestre mensajes de error claros y seguros, para pueda entender y solucionar el problema",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Inicio de sesión con credenciales incorrectas muestra mensaje de error claro",
+          "scenario_type": "negative",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@error_handling",
+            "@login",
+            "@ep",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta acceder con credenciales incorrectas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el sistema detecta el error de credenciales",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error claro y seguro",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-005"
+        },
+        {
+          "name": "Inicio de sesión con email inexistente muestra mensaje de error claro",
+          "scenario_type": "negative",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@error_handling",
+            "@login",
+            "@ep",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta acceder con un email inexistente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el sistema detecta el error de email inexistente",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error claro y seguro",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-005"
+        },
+        {
+          "name": "Inicio de sesión con contraseña vacía muestra mensaje de error claro",
+          "scenario_type": "negative",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@error_handling",
+            "@login",
+            "@ep",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta acceder con una contraseña vacía",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el sistema detecta el error de contraseña vacía",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error claro y seguro",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-005"
+        },
+        {
+          "name": "Inicio de sesión con email vacío muestra mensaje de error claro",
+          "scenario_type": "negative",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@error_handling",
+            "@login",
+            "@ep",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta acceder con un email vacío",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el sistema detecta el error de email vacío",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error claro y seguro",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-005"
+        },
+        {
+          "name": "Inicio de sesión con formato de email incorrecto muestra mensaje de error claro",
+          "scenario_type": "negative",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@error_handling",
+            "@login",
+            "@ep",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta acceder con un formato de email incorrecto",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el sistema detecta el error de formato de email",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error claro y seguro",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-005"
+        }
+      ],
+      "user_story_id": "US-005"
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-001",
+      "scenario_names": [
+        "Inicio de sesión exitoso con credenciales válidas",
+        "Inicio de sesión con contraseña mínima de 8 caracteres",
+        "Inicio de sesión con contraseña máxima de 32 caracteres",
+        "Inicio de sesión con contraseña de 7 caracteres (invalida)",
+        "Inicio de sesión con contraseña de 33 caracteres (invalida)"
+      ],
+      "coverage_type": [
+        "positive",
+        "boundary",
+        "boundary",
+        "negative",
+        "negative"
+      ],
+      "quality_characteristics_covered": [
+        "security"
+      ]
+    },
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-002",
+      "scenario_names": [
+        "Inicio de sesión fallido por email incorrecto",
+        "Inicio de sesión fallido por contraseña incorrecta",
+        "Inicio de sesión fallido por email y contraseña incorrectos",
+        "Inicio de sesión fallido por contraseña con menos de 8 caracteres",
+        "Inicio de sesión fallido por contraseña con más de 32 caracteres",
+        "Inicio de sesión fallido por contraseña con exactamente 8 caracteres",
+        "Inicio de sesión fallido por contraseña con exactamente 32 caracteres"
+      ],
+      "coverage_type": [
+        "negative",
+        "negative",
+        "negative",
+        "boundary",
+        "boundary",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "security"
+      ]
+    },
+    {
+      "user_story_id": "US-002",
+      "criterion_id": "AC-003",
+      "scenario_names": [
+        "Bloqueo temporal de cuenta después de 5 intentos fallidos consecutivos",
+        "No bloqueo temporal de cuenta después de 4 intentos fallidos consecutivos",
+        "Bloqueo temporal de cuenta después de 6 intentos fallidos consecutivos",
+        "Bloqueo temporal de cuenta después de 5 intentos fallidos no consecutivos",
+        "Bloqueo temporal de cuenta después de 5 intentos fallidos consecutivos con mensaje de error claro"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "positive",
+        "negative",
+        "positive"
+      ],
+      "quality_characteristics_covered": [
+        "usability",
+        "security"
+      ]
+    },
+    {
+      "user_story_id": "US-003",
+      "criterion_id": "AC-004",
+      "scenario_names": [
+        "Sesión cerrada después de 30 minutos de inactividad",
+        "Sesión no cerrada con menos de 30 minutos de inactividad",
+        "Sesión no cerrada con más de 30 minutos de inactividad",
+        "Sesión cerrada con exactamente 30 minutos de inactividad",
+        "Sesión cerrada con 1 minuto de inactividad después de 29 minutos de inactividad"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "negative",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "security"
+      ]
+    },
+    {
+      "user_story_id": "US-004",
+      "criterion_id": "AC-005",
+      "scenario_names": [
+        "Rendimiento con 100 usuarios conectados",
+        "Rendimiento con 500 usuarios conectados",
+        "Rendimiento con 99 usuarios conectados",
+        "Rendimiento con 101 usuarios conectados",
+        "Rendimiento con 499 usuarios conectados",
+        "Rendimiento con 501 usuarios conectados"
+      ],
+      "coverage_type": [
+        "positive",
+        "positive",
+        "boundary",
+        "boundary",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "performance_efficiency"
+      ]
+    },
+    {
+      "user_story_id": "US-005",
+      "criterion_id": "AC-006",
+      "scenario_names": [
+        "Inicio de sesión con credenciales incorrectas muestra mensaje de error claro",
+        "Inicio de sesión con email inexistente muestra mensaje de error claro",
+        "Inicio de sesión con contraseña vacía muestra mensaje de error claro",
+        "Inicio de sesión con email vacío muestra mensaje de error claro",
+        "Inicio de sesión con formato de email incorrecto muestra mensaje de error claro"
+      ],
+      "coverage_type": [
+        "negative",
+        "negative",
+        "negative",
+        "negative",
+        "negative"
+      ],
+      "quality_characteristics_covered": [
+        "usability"
+      ]
+    }
+  ],
+  "review": {
+    "review_status": "pending_review",
+    "version": 1,
+    "approved_by": null,
+    "approved_at": null,
+    "analyst_feedback": null,
+    "change_history": []
+  },
+  "total_scenarios": 33,
+  "total_positive": 7,
+  "total_negative": 14,
+  "total_boundary": 12,
+  "uncovered_criteria": [],
+  "coverage_by_characteristic": {
+    "functional_suitability": 0,
+    "performance_efficiency": 6,
+    "compatibility": 0,
+    "usability": 6,
+    "reliability": 0,
+    "security": 21,
+    "maintainability": 0,
+    "portability": 0
+  }
+}

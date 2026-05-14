@@ -78,3 +78,123 @@ export interface RunSummary {
   created_at: string
   story_count?: number
 }
+
+// ── Quality / V3 / V4 types ──────────────────────────────────────────────────
+
+export type QualityCharacteristic =
+  | 'functional_suitability'
+  | 'performance_efficiency'
+  | 'security'
+  | 'usability'
+  | 'reliability'
+  | 'compatibility'
+  | 'maintainability'
+  | 'portability'
+
+export type ScenarioType =
+  | 'positive'
+  | 'negative'
+  | 'boundary'
+  | 'edge_case'
+  | 'error_handling'
+
+export interface GherkinStep {
+  keyword: string
+  text: string
+}
+
+export interface GherkinScenario {
+  name: string
+  scenario_type: ScenarioType
+  quality_characteristic: QualityCharacteristic
+  tags: string[]
+  steps: GherkinStep[]
+  acceptance_criterion_id: string
+  user_story_id: string
+}
+
+export interface GherkinFeature {
+  name: string
+  description: string
+  user_story_id: string
+  scenarios: GherkinScenario[]
+}
+
+export interface CoverageByCharacteristic {
+  [key: string]: number
+}
+
+export interface ContractB {
+  pipeline_run_id: string
+  agent_version: string
+  features: GherkinFeature[]
+  total_scenarios: number
+  total_positive: number
+  total_negative: number
+  total_boundary: number
+  coverage_by_characteristic: CoverageByCharacteristic
+}
+
+export interface RiskItem {
+  qc: string
+  n_escenarios: number
+  pct_total: number
+  nivel: 'CRITICO' | 'ALTO' | 'MEDIO' | 'BAJO'
+  descripcion_riesgo: string
+  contexto_impacto: string
+  recomendacion_base: string
+  recomendacion_llm: string
+  analisis_impacto?: string
+  criterios_exito?: string
+  referencias_tecnicas?: string
+  enriquecido_llm: boolean
+}
+
+export interface RiskMatrix {
+  pipeline_run_id: string
+  total_escenarios: number
+  enriquecido_llm: boolean
+  riesgos: RiskItem[]
+  resumen_ejecutivo: {
+    total_qc: number
+    criticos: number
+    altos: number
+    medios: number
+    bajos: number
+    qc_sin_cobertura: string[]
+  }
+}
+
+export interface ScenarioDecision {
+  scenario_name: string
+  action: 'accepted' | 'reclassified' | 'comment'
+  new_quality_characteristic?: QualityCharacteristic
+  reason?: string
+}
+
+export interface QualityStatusResponse {
+  quality_run_id: string
+  run_id: string
+  status: 'running' | 'completed' | 'failed'
+  progress_msg?: string
+  contract_b?: ContractB
+  error?: string
+}
+
+export interface ReviewResult {
+  quality_run_id: string
+  pdf_available: boolean
+  pdf_url?: string
+  risk_matrix?: RiskMatrix
+  reviewed_contract_b?: ContractB
+}
+
+export interface QualityForRunResponse {
+  found: boolean
+  quality_run_id?: string
+  status?: string
+  has_review: boolean
+  contract_b?: ContractB
+  risk_matrix?: RiskMatrix
+  pdf_url?: string
+}

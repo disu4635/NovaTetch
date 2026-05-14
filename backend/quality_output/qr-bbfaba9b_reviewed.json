@@ -1,0 +1,1190 @@
+{
+  "pipeline_run_id": "v3-623e0a88",
+  "agent_name": "test_architect",
+  "agent_version": "0.3.0-v3-iso25010",
+  "created_at": "2026-05-14T06:13:18.613509",
+  "features": [
+    {
+      "name": "Iniciar sesión de forma segura",
+      "description": "Como Usuario registrado, quiero Iniciar sesión con mi email y contraseña, para Acceder a las funcionalidades del sistema de forma segura",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Inicio de sesión exitoso con credenciales válidas",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Un usuario con cuenta activa y credenciales válidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Ingresa email y contraseña correctos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema inicia sesión en menos de 2 segundos, registra fecha/hora/IP en log de auditoría y redirige al dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión fallido con contraseña incorrecta",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Un usuario con cuenta activa y credenciales válidas excepto la contraseña",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Ingresa email correcto y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error de inicio de sesión",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña mínima de 8 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Un usuario con cuenta activa y contraseña de 8 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Ingresa email y contraseña de 8 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema inicia sesión en menos de 2 segundos, registra fecha/hora/IP en log de auditoría y redirige al dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña justo debajo del mínimo de 8 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Un usuario con cuenta activa y contraseña de 7 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Ingresa email y contraseña de 7 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que la contraseña es demasiado corta",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña máxima de 32 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Un usuario con cuenta activa y contraseña de 32 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Ingresa email y contraseña de 32 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema inicia sesión en menos de 2 segundos, registra fecha/hora/IP en log de auditoría y redirige al dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con contraseña justo encima del máximo de 32 caracteres",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Un usuario con cuenta activa y contraseña de 33 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Ingresa email y contraseña de 33 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que la contraseña es demasiado larga",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión con email y contraseña vacíos",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Un usuario con cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Ingresa email y contraseña vacíos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que el email y la contraseña son obligatorios",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Inicio de sesión exitoso después de desbloqueo",
+          "scenario_type": "positive",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Usuario con cuenta activa y contraseña correcta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El usuario intenta iniciar sesión con su email y contraseña correcta después de desbloqueo",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema permite el inicio de sesión y muestra la página de inicio",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Bloqueo por 5 intentos fallidos consecutivos",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Usuario con cuenta activa y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El usuario intenta iniciar sesión 5 veces con su email y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema bloquea la cuenta por 30 minutos y muestra mensaje 'Cuenta bloqueada temporalmente. Contacte al administrador o espere 30 minutos.'",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Intentos fallidos menores a 5",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Usuario con cuenta activa y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El usuario intenta iniciar sesión 4 veces con su email y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema no bloquea la cuenta y muestra mensaje de error de inicio de sesión",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Intentos fallidos mayores a 5",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Usuario con cuenta activa y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El usuario intenta iniciar sesión 6 veces con su email y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema bloquea la cuenta por 30 minutos y muestra mensaje 'Cuenta bloqueada temporalmente. Contacte al administrador o espere 30 minutos.'",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Bloqueo por 30 minutos",
+          "scenario_type": "boundary",
+          "quality_characteristic": "security",
+          "tags": [
+            "@login",
+            "@security",
+            "@bva",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Usuario con cuenta activa y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El usuario intenta iniciar sesión 5 veces con su email y contraseña incorrecta y espera 30 minutos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema desbloquea la cuenta y permite el inicio de sesión",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Notificación de bloqueo al usuario y administrador",
+          "scenario_type": "positive",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@login",
+            "@notification",
+            "@dt",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Usuario con cuenta activa y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El usuario intenta iniciar sesión 5 veces con su email y contraseña incorrecta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema envía email de notificación al usuario y al administrador con mensaje 'Cuenta bloqueada temporalmente. Contacte al administrador o espere 30 minutos.'",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        }
+      ],
+      "user_story_id": "US-001"
+    },
+    {
+      "name": "Gestión de permisos de forma eficiente",
+      "description": "Como Administrador del sistema, quiero Gestionar los permisos de los usuarios, para Asignar acceso a funcionalidades según roles y responsabilidades",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Asignar permisos a un usuario con éxito",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@permisos",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Asigna permisos a un usuario con mínimo 1 permiso",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema actualiza los permisos del usuario y registra la acción en el log de auditoría",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Asignar permisos a un usuario con máximo 10 permisos",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@permisos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Asigna permisos a un usuario con máximo 10 permisos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema actualiza los permisos del usuario y registra la acción en el log de auditoría",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Asignar permisos a un usuario con menos de 1 permiso",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@permisos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Asigna permisos a un usuario con menos de 1 permiso",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que es necesario asignar al menos 1 permiso",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Asignar permisos a un usuario con más de 10 permisos",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@permisos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Asigna permisos a un usuario con más de 10 permisos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que es necesario asignar como máximo 10 permisos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Asignar permisos a un usuario sin permisos previos",
+          "scenario_type": "edge_case",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@permisos",
+            "@dt",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin' y un usuario sin permisos previos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Asigna permisos a un usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema actualiza los permisos del usuario y registra la acción en el log de auditoría",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Asignar permisos a un usuario con permisos previos",
+          "scenario_type": "edge_case",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@permisos",
+            "@dt",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin' y un usuario con permisos previos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Asigna permisos a un usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema actualiza los permisos del usuario y registra la acción en el log de auditoría",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Revocar permisos a un usuario con éxito",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@revocar_permisos",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "Un usuario con permisos asignados",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Revoco los permisos del usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema actualiza los permisos del usuario y registra la acción en el log de auditoría",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Revocar permisos a un usuario sin permisos asignados",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@revocar_permisos",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "Un usuario sin permisos asignados",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Revoco los permisos del usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que el usuario no tiene permisos asignados",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Revocar permisos a un usuario con mínimo 1 permiso",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@revocar_permisos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "Un usuario con 1 permiso asignado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Revoco el permiso del usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema actualiza los permisos del usuario y registra la acción en el log de auditoría",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Revocar permisos a un usuario con máximo 10 permisos",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@revocar_permisos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "Un usuario con 10 permisos asignados",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Revoco los permisos del usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema actualiza los permisos del usuario y registra la acción en el log de auditoría",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Revocar permisos a un usuario con más de 10 permisos",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@revocar_permisos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "Administrador autenticado con rol 'admin'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "Un usuario con 11 permisos asignados",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Revoco los permisos del usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que el usuario tiene demasiados permisos asignados",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Revocar permisos a un usuario sin autenticación",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@revocar_permisos",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "No hay un administrador autenticado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "And",
+              "text": "Un usuario con permisos asignados",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "Intento revocar los permisos del usuario",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que es necesario autenticarse para realizar la acción",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        }
+      ],
+      "user_story_id": "US-002"
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-001",
+      "scenario_names": [
+        "Inicio de sesión exitoso con credenciales válidas",
+        "Inicio de sesión fallido con contraseña incorrecta",
+        "Inicio de sesión con contraseña mínima de 8 caracteres",
+        "Inicio de sesión con contraseña justo debajo del mínimo de 8 caracteres",
+        "Inicio de sesión con contraseña máxima de 32 caracteres",
+        "Inicio de sesión con contraseña justo encima del máximo de 32 caracteres",
+        "Inicio de sesión con email y contraseña vacíos"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "boundary",
+        "boundary",
+        "boundary",
+        "boundary",
+        "negative"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-002",
+      "scenario_names": [
+        "Inicio de sesión exitoso después de desbloqueo",
+        "Bloqueo por 5 intentos fallidos consecutivos",
+        "Intentos fallidos menores a 5",
+        "Intentos fallidos mayores a 5",
+        "Bloqueo por 30 minutos",
+        "Notificación de bloqueo al usuario y administrador"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "boundary",
+        "boundary",
+        "boundary",
+        "positive"
+      ],
+      "quality_characteristics_covered": [
+        "usability",
+        "security"
+      ]
+    },
+    {
+      "user_story_id": "US-002",
+      "criterion_id": "AC-003",
+      "scenario_names": [
+        "Asignar permisos a un usuario con éxito",
+        "Asignar permisos a un usuario con máximo 10 permisos",
+        "Asignar permisos a un usuario con menos de 1 permiso",
+        "Asignar permisos a un usuario con más de 10 permisos",
+        "Asignar permisos a un usuario sin permisos previos",
+        "Asignar permisos a un usuario con permisos previos"
+      ],
+      "coverage_type": [
+        "positive",
+        "boundary",
+        "negative",
+        "negative",
+        "edge_case",
+        "edge_case"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-002",
+      "criterion_id": "AC-004",
+      "scenario_names": [
+        "Revocar permisos a un usuario con éxito",
+        "Revocar permisos a un usuario sin permisos asignados",
+        "Revocar permisos a un usuario con mínimo 1 permiso",
+        "Revocar permisos a un usuario con máximo 10 permisos",
+        "Revocar permisos a un usuario con más de 10 permisos",
+        "Revocar permisos a un usuario sin autenticación"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "boundary",
+        "boundary",
+        "negative",
+        "negative"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability",
+        "security"
+      ]
+    }
+  ],
+  "review": {
+    "review_status": "approved",
+    "version": 1,
+    "approved_by": "Melvin",
+    "approved_at": "2026-05-14T06:14:40.046064",
+    "analyst_feedback": null,
+    "change_history": [
+      {
+        "timestamp": "2026-05-14T06:14:40.045941",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión exitoso con credenciales válidas': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045953",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión fallido con contraseña incorrecta': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045956",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión con contraseña mínima de 8 caracteres': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045960",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión con contraseña justo debajo del mínimo de 8 caracteres': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045965",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión con contraseña máxima de 32 caracteres': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045970",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión con contraseña justo encima del máximo de 32 caracteres': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045973",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión con email y contraseña vacíos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045976",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Inicio de sesión exitoso después de desbloqueo': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045979",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Bloqueo por 5 intentos fallidos consecutivos': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045981",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Intentos fallidos menores a 5': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045984",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Intentos fallidos mayores a 5': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045987",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Bloqueo por 30 minutos': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045990",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Notificación de bloqueo al usuario y administrador': clasificación 'usability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045993",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Asignar permisos a un usuario con éxito': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045996",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Asignar permisos a un usuario con máximo 10 permisos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.045999",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Asignar permisos a un usuario con menos de 1 permiso': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046001",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Asignar permisos a un usuario con más de 10 permisos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046004",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Asignar permisos a un usuario sin permisos previos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046007",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Asignar permisos a un usuario con permisos previos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046010",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Revocar permisos a un usuario con éxito': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046012",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Revocar permisos a un usuario sin permisos asignados': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046015",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Revocar permisos a un usuario con mínimo 1 permiso': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046020",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Revocar permisos a un usuario con máximo 10 permisos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046022",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Revocar permisos a un usuario con más de 10 permisos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T06:14:40.046029",
+        "reviewer": "Melvin",
+        "action": "accepted",
+        "notes": "Escenario 'Revocar permisos a un usuario sin autenticación': clasificación 'security' confirmada."
+      }
+    ]
+  },
+  "total_scenarios": 25,
+  "total_positive": 5,
+  "total_negative": 8,
+  "total_boundary": 10,
+  "uncovered_criteria": [],
+  "coverage_by_characteristic": {
+    "functional_suitability": 18,
+    "performance_efficiency": 0,
+    "compatibility": 0,
+    "usability": 1,
+    "reliability": 0,
+    "security": 6,
+    "maintainability": 0,
+    "portability": 0
+  }
+}

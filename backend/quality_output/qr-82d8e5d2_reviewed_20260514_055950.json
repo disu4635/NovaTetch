@@ -1,0 +1,1687 @@
+{
+  "pipeline_run_id": "v3-02485404",
+  "agent_name": "test_architect",
+  "agent_version": "0.3.0-v3-iso25010",
+  "created_at": "2026-05-14T05:58:02.755939",
+  "features": [
+    {
+      "name": "Iniciar sesión con correo y contraseña",
+      "description": "Como usuario registrado, quiero iniciar sesión con mi correo y contraseña, para pueda acceder al Dashboard de la app",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Iniciar sesión con correo y contraseña válidos",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa y credenciales válidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa su correo y contraseña correctos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema inicia sesión, registra fecha/hora/IP en log de auditoría y redirige al Dashboard en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo inválido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa pero ingresa un correo inválido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa su correo inválido y contraseña correcta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que el correo es inválido",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con contraseña inválida",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa pero ingresa una contraseña inválida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa su correo correcto y contraseña inválida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que la contraseña es inválida",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo y contraseña vacíos",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta iniciar sesión con correo y contraseña vacíos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa correo y contraseña vacíos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que el correo y la contraseña son obligatorios",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo muy largo",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta iniciar sesión con un correo muy largo",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa un correo con más de 100 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que el correo es demasiado largo",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con contraseña muy larga",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta iniciar sesión con una contraseña muy larga",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa una contraseña con más de 50 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que la contraseña es demasiado larga",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo y contraseña que contienen caracteres especiales",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario intenta iniciar sesión con un correo y contraseña que contienen caracteres especiales",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa un correo y contraseña que contienen caracteres como @, #, $, etc.",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema inicia sesión correctamente y no muestra errores",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo y contraseña válidos",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa con correo y contraseña válidos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa su correo y contraseña correctos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra el Dashboard de la app",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo inválido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa con correo y contraseña válidos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo inválido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y ofrece opciones de registrarse o restablecer contraseña",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con contraseña inválida",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa con correo y contraseña válidos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa su correo correcto y una contraseña inválida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y ofrece opciones de registrarse o restablecer contraseña",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo y contraseña vacíos",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa con correo y contraseña válidos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo y contraseña vacíos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y ofrece opciones de registrarse o restablecer contraseña",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con correo muy largo",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa con correo y contraseña válidos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo muy largo",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y ofrece opciones de registrarse o restablecer contraseña",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Iniciar sesión con contraseña muy larga",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@login",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa con correo y contraseña válidos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa su correo correcto y una contraseña muy larga",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y ofrece opciones de registrarse o restablecer contraseña",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        }
+      ],
+      "user_story_id": "US-001"
+    },
+    {
+      "name": "Registrarse como nuevo usuario",
+      "description": "Como usuario no registrado, quiero registrarme como nuevo usuario, para pueda acceder al Dashboard de la app",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Registro exitoso como nuevo usuario con datos válidos",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no está registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro válidos: nombre 'Juan', apellido 'Pérez', correo 'juan@example.com', contraseña 'password123'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema crea la cuenta, envía correo de confirmación y redirige al Dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro fallido por nombre vacío",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no está registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro con nombre vacío: nombre '', apellido 'Pérez', correo 'juan@example.com', contraseña 'password123'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que el nombre es obligatorio",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro fallido por correo inválido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no está registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro con correo inválido: nombre 'Juan', apellido 'Pérez', correo 'invalido', contraseña 'password123'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que el correo es inválido",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro fallido por contraseña débil",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@registro",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no está registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro con contraseña débil: nombre 'Juan', apellido 'Pérez', correo 'juan@example.com', contraseña '123'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que la contraseña es débil",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro exitoso con datos de registro válidos en límite inferior",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no está registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro válidos en límite inferior: nombre 'a', apellido 'b', correo 'a@example.com', contraseña 'a1'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema crea la cuenta, envía correo de confirmación y redirige al Dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro exitoso con datos de registro válidos en límite superior",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no está registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro válidos en límite superior: nombre 'abcdefghijklmnopqrstuvwxyz', apellido 'abcdefghijklmnopqrstuvwxyz', correo 'abcdefghijklmnopqrstuvwxyz@example.com', contraseña 'abcdefghijklmnopqrstuvwxyz1'",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema crea la cuenta, envía correo de confirmación y redirige al Dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro exitoso con datos válidos",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro válidos",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de éxito y redirige al Dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro con nombre vacío",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@nombre_vacio",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro con nombre vacío",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error: 'Nombre es requerido'",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro con apellido vacío",
+          "scenario_type": "negative",
+          "quality_characteristic": "usability",
+          "tags": [
+            "@registro",
+            "@apellido_vacio",
+            "@ep",
+            "@iso-usability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro con apellido vacío",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error: 'Apellido es requerido'",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro con correo electrónico inválido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@correo_invalido",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro con correo electrónico inválido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error: 'Correo electrónico es inválido'",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro con contraseña débil",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@registro",
+            "@contraseña_debil",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro con contraseña débil",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error: 'Contraseña es débil'",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro con datos de registro inválidos (limite inferior)",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@datos_invalidos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro inválidos (limite inferior)",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error y solicita corrección de datos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Registro con datos de registro inválidos (limite superior)",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@registro",
+            "@datos_invalidos",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario no registrado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "ingresa datos de registro inválidos (limite superior)",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra mensaje de error y solicita corrección de datos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        }
+      ],
+      "user_story_id": "US-002"
+    },
+    {
+      "name": "Restablecer contraseña",
+      "description": "Como usuario registrado, quiero restablecer mi contraseña, para pueda acceder al Dashboard de la app",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Restablecer contraseña exitosamente",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa su correo electrónico válido y una nueva contraseña válida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema actualiza la contraseña, envía un correo de confirmación y redirige al Dashboard",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con correo electrónico inválido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo electrónico inválido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que el correo electrónico es inválido",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con nueva contraseña inválida",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa una nueva contraseña inválida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que la nueva contraseña es inválida",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con correo electrónico vacío",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo electrónico vacío",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que el correo electrónico es requerido",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con nueva contraseña vacía",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa una nueva contraseña vacía",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error indicando que la nueva contraseña es requerida",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con correo electrónico y nueva contraseña válidos, pero con conexión a internet lenta",
+          "scenario_type": "edge_case",
+          "quality_characteristic": "performance_efficiency",
+          "tags": [
+            "@restablecer_contraseña",
+            "@dt",
+            "@iso-performance-efficiency"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa y una conexión a internet lenta",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa su correo electrónico válido y una nueva contraseña válida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema actualiza la contraseña, envía un correo de confirmación y redirige al Dashboard después de un tiempo razonable",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-005",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con correo y contraseña válidos",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo electrónico válido y una nueva contraseña válida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema restablece la contraseña y muestra un mensaje de éxito",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con correo inválido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo electrónico inválido",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y solicita corrección de datos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con nueva contraseña inválida (menos de 8 caracteres)",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa una nueva contraseña con menos de 8 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y solicita corrección de datos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con nueva contraseña inválida (mayor a 50 caracteres)",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa una nueva contraseña con más de 50 caracteres",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y solicita corrección de datos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-003"
+        },
+        {
+          "name": "Restablecer contraseña con correo y nueva contraseña inválidos",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@restablecer_contraseña",
+            "@dt",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "el usuario tiene una cuenta activa",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "el usuario ingresa un correo electrónico inválido y una nueva contraseña inválida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "el sistema muestra un mensaje de error y solicita corrección de datos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-006",
+          "user_story_id": "US-003"
+        }
+      ],
+      "user_story_id": "US-003"
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-001",
+      "scenario_names": [
+        "Iniciar sesión con correo y contraseña válidos",
+        "Iniciar sesión con correo inválido",
+        "Iniciar sesión con contraseña inválida",
+        "Iniciar sesión con correo y contraseña vacíos",
+        "Iniciar sesión con correo muy largo",
+        "Iniciar sesión con contraseña muy larga",
+        "Iniciar sesión con correo y contraseña que contienen caracteres especiales"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "negative",
+        "boundary",
+        "boundary",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-002",
+      "scenario_names": [
+        "Iniciar sesión con correo y contraseña válidos",
+        "Iniciar sesión con correo inválido",
+        "Iniciar sesión con contraseña inválida",
+        "Iniciar sesión con correo y contraseña vacíos",
+        "Iniciar sesión con correo muy largo",
+        "Iniciar sesión con contraseña muy larga"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "negative",
+        "boundary",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-002",
+      "criterion_id": "AC-003",
+      "scenario_names": [
+        "Registro exitoso como nuevo usuario con datos válidos",
+        "Registro fallido por nombre vacío",
+        "Registro fallido por correo inválido",
+        "Registro fallido por contraseña débil",
+        "Registro exitoso con datos de registro válidos en límite inferior",
+        "Registro exitoso con datos de registro válidos en límite superior"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "negative",
+        "negative",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "security",
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-002",
+      "criterion_id": "AC-004",
+      "scenario_names": [
+        "Registro exitoso con datos válidos",
+        "Registro con nombre vacío",
+        "Registro con apellido vacío",
+        "Registro con correo electrónico inválido",
+        "Registro con contraseña débil",
+        "Registro con datos de registro inválidos (limite inferior)",
+        "Registro con datos de registro inválidos (limite superior)"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "negative",
+        "negative",
+        "negative",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "security",
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-003",
+      "criterion_id": "AC-005",
+      "scenario_names": [
+        "Restablecer contraseña exitosamente",
+        "Restablecer contraseña con correo electrónico inválido",
+        "Restablecer contraseña con nueva contraseña inválida",
+        "Restablecer contraseña con correo electrónico vacío",
+        "Restablecer contraseña con nueva contraseña vacía",
+        "Restablecer contraseña con correo electrónico y nueva contraseña válidos, pero con conexión a internet lenta"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "negative",
+        "boundary",
+        "boundary",
+        "edge_case"
+      ],
+      "quality_characteristics_covered": [
+        "performance_efficiency",
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-003",
+      "criterion_id": "AC-006",
+      "scenario_names": [
+        "Restablecer contraseña con correo y contraseña válidos",
+        "Restablecer contraseña con correo inválido",
+        "Restablecer contraseña con nueva contraseña inválida (menos de 8 caracteres)",
+        "Restablecer contraseña con nueva contraseña inválida (mayor a 50 caracteres)",
+        "Restablecer contraseña con correo y nueva contraseña inválidos"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "negative",
+        "negative",
+        "negative"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability"
+      ]
+    }
+  ],
+  "review": {
+    "review_status": "approved",
+    "version": 1,
+    "approved_by": "David",
+    "approved_at": "2026-05-14T05:59:46.139109",
+    "analyst_feedback": "Aprobadisimo",
+    "change_history": [
+      {
+        "timestamp": "2026-05-14T05:59:46.138890",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo y contraseña válidos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138900",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo inválido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138903",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con contraseña inválida': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138906",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo y contraseña vacíos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138909",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo muy largo': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138913",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con contraseña muy larga': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138916",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo y contraseña que contienen caracteres especiales': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138918",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo y contraseña válidos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138921",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo inválido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138924",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con contraseña inválida': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138927",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo y contraseña vacíos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138930",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con correo muy largo': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138933",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Iniciar sesión con contraseña muy larga': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138935",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro exitoso como nuevo usuario con datos válidos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138938",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro fallido por nombre vacío': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138940",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro fallido por correo inválido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138943",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro fallido por contraseña débil': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138947",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro exitoso con datos de registro válidos en límite inferior': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138949",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro exitoso con datos de registro válidos en límite superior': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138952",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro exitoso con datos válidos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138955",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro con nombre vacío': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.138995",
+        "reviewer": "David",
+        "action": "reclassified",
+        "notes": "Escenario 'Registro con apellido vacío': functional_suitability -> usability. Razon: (sin razón)"
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139001",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro con correo electrónico inválido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139004",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro con contraseña débil': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139007",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro con datos de registro inválidos (limite inferior)': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139010",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Registro con datos de registro inválidos (limite superior)': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139013",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña exitosamente': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139016",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con correo electrónico inválido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139019",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con nueva contraseña inválida': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139022",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con correo electrónico vacío': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139025",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con nueva contraseña vacía': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139028",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con correo electrónico y nueva contraseña válidos, pero con conexión a internet lenta': clasificación 'performance_efficiency' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139031",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con correo y contraseña válidos': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139033",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con correo inválido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139036",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con nueva contraseña inválida (menos de 8 caracteres)': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139039",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con nueva contraseña inválida (mayor a 50 caracteres)': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-05-14T05:59:46.139042",
+        "reviewer": "David",
+        "action": "accepted",
+        "notes": "Escenario 'Restablecer contraseña con correo y nueva contraseña inválidos': clasificación 'functional_suitability' confirmada."
+      }
+    ]
+  },
+  "total_scenarios": 37,
+  "total_positive": 6,
+  "total_negative": 17,
+  "total_boundary": 13,
+  "uncovered_criteria": [],
+  "coverage_by_characteristic": {
+    "functional_suitability": 33,
+    "performance_efficiency": 1,
+    "compatibility": 0,
+    "usability": 1,
+    "reliability": 0,
+    "security": 2,
+    "maintainability": 0,
+    "portability": 0
+  }
+}
