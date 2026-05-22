@@ -7,8 +7,10 @@ import type {
   RunDetail,
   RunSummary,
   ContractB,
+  ContractC,
   RiskMatrix,
   ScenarioDecision,
+  ModuleAction,
   QualityForRunResponse,
 } from './types'
 import PromptForm from './components/PromptForm'
@@ -18,6 +20,9 @@ import RunHistory from './components/RunHistory'
 import QualityPanel from './components/QualityPanel'
 import ScenarioReviewer from './components/ScenarioReviewer'
 import RiskMatrixComponent from './components/RiskMatrix'
+import CodeGenPanel from './components/CodeGenPanel'
+import CodeReviewer from './components/CodeReviewer'
+import CodeGenResults from './components/CodeGenResults'
 
 type Phase =
   | 'idle'
@@ -30,6 +35,10 @@ type Phase =
   | 'quality-review'
   | 'quality-submitting'
   | 'quality-done'
+  | 'codegen-running'
+  | 'codegen-review'
+  | 'codegen-submitting'
+  | 'codegen-done'
 
 export default function App() {
   const [phase, setPhase] = useState<Phase>('idle')
@@ -44,6 +53,11 @@ export default function App() {
   const [qualityProgressMsg, setQualityProgressMsg] = useState<string>('')
   const [contractB, setContractB] = useState<ContractB | null>(null)
   const [riskMatrix, setRiskMatrix] = useState<RiskMatrix | null>(null)
+
+  // Codegen state
+  const [codegenRunId, setCodegenRunId] = useState<string | null>(null)
+  const [codegenProgressMsg, setCodegenProgressMsg] = useState<string>('')
+  const [contractC, setContractC] = useState<ContractC | null>(null)
 
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
@@ -104,13 +118,26 @@ export default function App() {
       setCurrentPrompt(detail.prompt)
       setAmbiguities([])
 
-      // Intentar restaurar el estado de calidad si existe
+      // Intentar restaurar estado de calidad
       const qf: QualityForRunResponse = await api.getQualityForRun(runId)
       if (qf.found && qf.quality_run_id) {
         setQualityRunId(qf.quality_run_id)
         if (qf.has_review && qf.risk_matrix) {
           setRiskMatrix(qf.risk_matrix)
-          setPhase('quality-done')
+
+          // Intentar restaurar estado de codegen si ya existe
+          const cgf = await api.getCodegenForQualityRun(qf.quality_run_id)
+          if (cgf.found && cgf.codegen_run_id && cgf.contract_c) {
+            setCodegenRunId(cgf.codegen_run_id)
+            setContractC(cgf.contract_c)
+            if (cgf.has_review) {
+              setPhase('codegen-done')
+            } else {
+              setPhase('codegen-review')
+            }
+          } else {
+            setPhase('quality-done')
+          }
         } else if (qf.contract_b) {
           setContractB(qf.contract_b)
           setPhase('quality-review')
@@ -136,6 +163,9 @@ export default function App() {
     setQualityProgressMsg('')
     setContractB(null)
     setRiskMatrix(null)
+    setCodegenRunId(null)
+    setCodegenProgressMsg('')
+    setContractC(null)
   }
 
   const handleDelete = async (runId: string) => {
@@ -211,6 +241,70 @@ export default function App() {
 
   const handleDownloadPdf = () => {
     if (qualityRunId) window.open(api.getPdfUrl(qualityRunId), '_blank')
+  }
+
+  // ── Codegen flow ──────────────────────────────────────────────────────────
+
+  const handleStartCodegen = async () => {
+    if (!qualityRunId) return
+    setError(null)
+    setPhase('codegen-running')
+    setCodegenProgressMsg('Iniciando generación de código...')
+
+    try {
+      const { codegen_run_id } = await api.startCodegen(qualityRunId)
+      setCodegenRunId(codegen_run_id)
+
+      pollRef.current = setInterval(async () => {
+        try {
+          const status = await api.getCodegenStatus(codegen_run_id)
+          if (status.progress_msg) setCodegenProgressMsg(status.progress_msg)
+
+          if (status.status === 'completed' && status.contract_c) {
+            if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null }
+            setContractC(status.contract_c)
+            setPhase('codegen-review')
+          } else if (status.status === 'failed') {
+            if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null }
+            setError(status.error ?? 'Error en la generación de código')
+            setPhase('error')
+          }
+        } catch {
+          // ignorar errores transitorios
+        }
+      }, 3000)
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Error al iniciar la generación')
+      setPhase('error')
+    }
+  }
+
+  const handleSubmitCodeReview = async (
+    actions: ModuleAction[],
+    reviewer: string,
+    verdict: string,
+    feedback: string,
+  ) => {
+    if (!codegenRunId) return
+    setPhase('codegen-submitting')
+    setError(null)
+    try {
+      const result = await api.submitCodeReview(codegenRunId, {
+        reviewer,
+        module_actions: actions,
+        verdict,
+        feedback: feedback || undefined,
+      }) as { codegen_run_id: string; reviewed_contract_c: ContractC }
+      setContractC(result.reviewed_contract_c)
+      setPhase('codegen-done')
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Error al enviar la revisión de código')
+      setPhase('error')
+    }
+  }
+
+  const handleDownloadCode = () => {
+    if (codegenRunId) window.open(api.getCodeDownloadUrl(codegenRunId), '_blank')
   }
 
   // ── Render ────────────────────────────────────────────────────────────────
@@ -322,7 +416,7 @@ export default function App() {
         )}
 
         {/* Stats bar — visible en todas las fases post-generación */}
-        {(['done', 'quality-running', 'quality-review', 'quality-done'] as Phase[]).includes(phase) && run?.result && (
+        {(['done', 'quality-running', 'quality-review', 'quality-done', 'codegen-running', 'codegen-review', 'codegen-done'] as Phase[]).includes(phase) && run?.result && (
           <section className="flex flex-col gap-6">
             <div className="rounded-2xl border border-slate-700 bg-slate-800/40 px-6 py-5 flex flex-wrap gap-8">
               <div>
@@ -394,8 +488,8 @@ export default function App() {
           </section>
         )}
 
-        {/* Quality Done: Risk Matrix + PDF */}
-        {phase === 'quality-done' && riskMatrix && (
+        {/* Quality Done + fases codegen: Risk Matrix siempre visible para comparar */}
+        {(['quality-done', 'codegen-running', 'codegen-review', 'codegen-done'] as Phase[]).includes(phase) && riskMatrix && (
           <section className="flex flex-col gap-6">
             <div className="rounded-xl border border-green-500/30 bg-green-500/5 px-5 py-4">
               <h3 className="font-semibold text-white mb-1">Análisis de calidad completado</h3>
@@ -406,6 +500,51 @@ export default function App() {
             <RiskMatrixComponent
               matrix={riskMatrix}
               onDownloadPdf={handleDownloadPdf}
+            />
+            {phase === 'quality-done' && (
+              <CodeGenPanel onStart={handleStartCodegen} loading={false} />
+            )}
+            {phase === 'codegen-running' && (
+              <CodeGenPanel onStart={handleStartCodegen} loading={true} progressMsg={codegenProgressMsg} />
+            )}
+          </section>
+        )}
+
+        {/* Codegen spinners */}
+        {phase === 'codegen-submitting' && (
+          <div className="flex flex-col items-center gap-4 py-16">
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-500 border-t-transparent" />
+            <p className="text-slate-300 font-medium">Aplicando revisión del código...</p>
+          </div>
+        )}
+
+        {/* Codegen Review */}
+        {phase === 'codegen-review' && contractC && (
+          <section className="flex flex-col gap-6">
+            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 px-5 py-4">
+              <h3 className="font-semibold text-white mb-1">
+                Revisión de código — {contractC.total_modules} módulos generados
+              </h3>
+              <p className="text-sm text-slate-400">
+                El pipeline V3 generó el código, los tests y ejecutó el análisis estático.
+                Revisa cada módulo como desarrollador senior y emite tu veredicto.
+              </p>
+            </div>
+            <CodeReviewer
+              contractC={contractC}
+              onSubmit={handleSubmitCodeReview}
+              submitting={false}
+            />
+          </section>
+        )}
+
+        {/* Codegen Done */}
+        {phase === 'codegen-done' && contractC && (
+          <section className="flex flex-col gap-6">
+            <CodeGenResults
+              contractC={contractC}
+              codegenRunId={codegenRunId!}
+              onDownloadCode={handleDownloadCode}
             />
           </section>
         )}

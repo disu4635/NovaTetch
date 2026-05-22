@@ -198,3 +198,134 @@ export interface QualityForRunResponse {
   risk_matrix?: RiskMatrix
   pdf_url?: string
 }
+
+// ── Contract C — Code Generator types ────────────────────────────────────────
+
+export interface GeneratedCodeModule {
+  filename: string
+  source_code: string
+  description: string
+  user_story_id: string
+}
+
+export interface GeneratedTest {
+  test_name: string
+  source_code: string
+  scenario_ids: string[]
+  target_module: string
+}
+
+export interface FunctionMetrics {
+  function_name: string
+  module: string
+  cyclomatic_complexity: number
+  cognitive_complexity: number
+  cc_band: 'A' | 'B' | 'C' | 'D' | 'E'
+  nesting_depth: number
+  exceeds_threshold: boolean
+}
+
+export interface SecurityFinding {
+  test_id: string
+  severity: 'low' | 'medium' | 'high'
+  module: string
+  line_number: number
+  description: string
+}
+
+export interface QualityCharacteristicResult {
+  characteristic: string
+  status: 'measured' | 'requires_human_judgment' | 'not_applicable'
+  metrics_used: string[]
+  verdict?: string
+}
+
+export interface QualityReportC {
+  function_metrics: FunctionMetrics[]
+  maintainability_index?: number
+  security_findings: SecurityFinding[]
+  iso_25010_coverage: QualityCharacteristicResult[]
+  functions_exceeding_threshold: number
+}
+
+export interface ScenarioTraceability {
+  scenario_id: string
+  scenario_name: string
+  covering_tests: string[]
+  status: 'covered' | 'orphan_forward' | 'orphan_backward'
+}
+
+export interface TestTraceability {
+  test_name: string
+  justifying_scenarios: string[]
+  status: 'covered' | 'orphan_forward' | 'orphan_backward'
+}
+
+export interface TraceabilityMatrix {
+  forward: ScenarioTraceability[]
+  backward: TestTraceability[]
+  requirements_coverage_pct: number
+  tests_justified_pct: number
+  orphan_scenarios: string[]
+  orphan_tests: string[]
+  cmmi_l3_compliant: boolean
+}
+
+export interface CoverageReport {
+  branch_coverage_pct: number
+  line_coverage_pct: number
+  meets_threshold: boolean
+  uncovered_modules: string[]
+}
+
+export interface CodeReviewMetadata {
+  review_status: 'pending_review' | 'approved' | 'rejected' | 'needs_changes'
+  version: number
+  approved_by?: string
+  approved_at?: string
+  reviewer_feedback?: string
+  change_history: Array<{
+    timestamp: string
+    reviewer: string
+    action: string
+    target?: string
+    notes?: string
+  }>
+}
+
+export interface ContractC {
+  pipeline_run_id: string
+  agent_version: string
+  source_contract_b_id: string
+  generated_code: GeneratedCodeModule[]
+  generated_tests: GeneratedTest[]
+  quality_report?: QualityReportC
+  traceability_matrix?: TraceabilityMatrix
+  coverage_report?: CoverageReport
+  review: CodeReviewMetadata
+  total_modules: number
+  total_tests: number
+}
+
+export interface ModuleAction {
+  module_name: string
+  action: 'accepted' | 'smell_flagged' | 'skipped'
+  notes?: string
+}
+
+export interface CodegenStatusResponse {
+  codegen_run_id: string
+  quality_run_id: string
+  status: 'running' | 'completed' | 'failed'
+  progress_msg?: string
+  contract_c?: ContractC
+  error?: string
+}
+
+export interface CodegenForQualityResponse {
+  found: boolean
+  codegen_run_id?: string
+  status?: string
+  has_review: boolean
+  contract_c?: ContractC
+}

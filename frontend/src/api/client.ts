@@ -7,10 +7,14 @@ import type {
   QualityForRunResponse,
   ReviewResult,
   ScenarioDecision,
+  CodegenStatusResponse,
+  CodegenForQualityResponse,
+  ModuleAction,
 } from '../types'
 
 const BASE_STORIES = '/api/stories'
 const BASE_QUALITY = '/api/quality'
+const BASE_CODEGEN = '/api/codegen'
 
 async function request<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, {
@@ -78,4 +82,34 @@ export const api = {
 
   getPdfUrl: (qualityRunId: string): string =>
     `${BASE_QUALITY}/download/${qualityRunId}`,
+
+  // Codegen
+  startCodegen: (qualityRunId: string): Promise<{ codegen_run_id: string }> =>
+    request<{ codegen_run_id: string }>(
+      `${BASE_CODEGEN}/start/${qualityRunId}`,
+      { method: 'POST' },
+    ),
+
+  getCodegenStatus: (codegenRunId: string): Promise<CodegenStatusResponse> =>
+    request<CodegenStatusResponse>(`${BASE_CODEGEN}/status/${codegenRunId}`),
+
+  getCodegenForQualityRun: (qualityRunId: string): Promise<CodegenForQualityResponse> =>
+    request<CodegenForQualityResponse>(`${BASE_CODEGEN}/for-quality-run/${qualityRunId}`),
+
+  submitCodeReview: (
+    codegenRunId: string,
+    payload: {
+      reviewer: string
+      module_actions: ModuleAction[]
+      verdict: string
+      feedback?: string
+    },
+  ): Promise<{ codegen_run_id: string; reviewed_contract_c: object }> =>
+    request(
+      `${BASE_CODEGEN}/review/${codegenRunId}`,
+      { method: 'POST', body: JSON.stringify(payload) },
+    ),
+
+  getCodeDownloadUrl: (codegenRunId: string): string =>
+    `${BASE_CODEGEN}/download/${codegenRunId}`,
 }
