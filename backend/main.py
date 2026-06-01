@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from database import init_db
 from routers.stories import router as stories_router
 from routers.quality import router as quality_router
+from routers.codegen import router as codegen_router
 
 app = FastAPI(title="NovaTech - QualityAI", version="2.0.0")
 
@@ -25,6 +26,7 @@ app.add_middleware(
 
 app.include_router(stories_router)
 app.include_router(quality_router)
+app.include_router(codegen_router)
 
 
 @app.on_event("startup")

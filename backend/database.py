@@ -34,6 +34,19 @@ class QualityRun(Base):
     created_at      = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
+class CodeGenRun(Base):
+    __tablename__ = "codegen_runs"
+
+    codegen_run_id  = Column(String, primary_key=True, index=True)
+    quality_run_id  = Column(String, nullable=False, index=True)
+    run_id          = Column(String, nullable=False, index=True)
+    status          = Column(String, nullable=False, default="running")
+    progress_msg    = Column(Text, nullable=True)
+    contract_c_json = Column(Text, nullable=True)
+    error           = Column(Text, nullable=True)
+    created_at      = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
 def init_db():
     Base.metadata.create_all(bind=engine)
 

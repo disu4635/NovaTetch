@@ -1,0 +1,1148 @@
+{
+  "pipeline_run_id": "v3-b1a4d29e",
+  "agent_name": "test_architect",
+  "agent_version": "0.3.0-v3-iso25010",
+  "created_at": "2026-06-01T07:58:59.329948",
+  "features": [
+    {
+      "name": "Subir imágenes al sistema",
+      "description": "Como Administrador del sistema, quiero Subir imágenes al sistema de gestión de imágenes web, para Pueda almacenar y gestionar imágenes de manera eficiente",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Subir imagen con éxito",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con formato jpg y tamaño menor a 5MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema sube la imagen con éxito y la almacena en la base de datos en menos de 5 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con formato no permitido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con formato exe",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que el formato no es permitido",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con tamaño superior al límite",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con tamaño de 5MB o más",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que el tamaño de la imagen es demasiado grande",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con formato jpg y tamaño menor a 5MB",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con formato jpg y tamaño de 4.9MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema sube la imagen con éxito y la almacena en la base de datos en menos de 5 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con formato png y tamaño menor a 5MB",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con formato png y tamaño de 4.9MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema sube la imagen con éxito y la almacena en la base de datos en menos de 5 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con formato gif y tamaño menor a 5MB",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con formato gif y tamaño de 4.9MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema sube la imagen con éxito y la almacena en la base de datos en menos de 5 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-001",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con tamaño válido",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con un tamaño de 4MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema sube la imagen correctamente",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con tamaño superior al máximo permitido",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con un tamaño de 6MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error y no sube la imagen",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con tamaño en el límite inferior",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con un tamaño de 5MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error y no sube la imagen",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con tamaño justo debajo del límite",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con un tamaño de 4.9MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema sube la imagen correctamente",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con tamaño justo encima del límite",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con un tamaño de 5.1MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error y no sube la imagen",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        },
+        {
+          "name": "Subir imagen con tamaño superior al límite",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@subir_imagen",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para subir imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona una imagen con un tamaño de 10MB",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error y no sube la imagen",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-002",
+          "user_story_id": "US-001"
+        }
+      ],
+      "user_story_id": "US-001"
+    },
+    {
+      "name": "Ver imágenes subidas al sistema",
+      "description": "Como Administrador del sistema, quiero Ver las imágenes subidas al sistema de gestión de imágenes web, para Pueda visualizar y gestionar las imágenes de manera eficiente",
+      "tags": [],
+      "background": null,
+      "scenarios": [
+        {
+          "name": "Ver imágenes subidas al sistema con éxito",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra las imágenes subidas con éxito en una galería en menos de 3 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema con 0 imágenes",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes y no hay imágenes subidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje indicando que no hay imágenes subidas",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema con 1 imagen",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes y hay 1 imagen subida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra la imagen subida en una galería en menos de 3 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema con 10 imágenes",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes y hay 10 imágenes subidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra las 10 imágenes subidas en una galería en menos de 3 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema con más de 10 imágenes",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes y hay más de 10 imágenes subidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra las imágenes subidas en una galería en menos de 3 segundos con paginación o scroll",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema sin autenticación",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@ver_imagenes",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema no está autenticado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador intenta seleccionar la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que es necesario autenticarse",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema sin permisos",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@ver_imagenes",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado pero no tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador intenta seleccionar la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error indicando que no tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-003",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema con éxito",
+          "scenario_type": "positive",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes y hay imágenes subidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra las imágenes subidas en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema sin imágenes",
+          "scenario_type": "negative",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@ep",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes y no hay imágenes subidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de que no hay imágenes subidas en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema con cero imágenes",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes y hay cero imágenes subidas",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de que no hay imágenes subidas en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema con una imagen",
+          "scenario_type": "boundary",
+          "quality_characteristic": "functional_suitability",
+          "tags": [
+            "@ver_imagenes",
+            "@bva",
+            "@iso-functional-suitability"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado y tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes y hay una imagen subida",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra la imagen subida en menos de 2 segundos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema sin autenticación",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@ver_imagenes",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema no está autenticado",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error de autenticación",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        },
+        {
+          "name": "Ver imágenes subidas al sistema sin permisos",
+          "scenario_type": "negative",
+          "quality_characteristic": "security",
+          "tags": [
+            "@ver_imagenes",
+            "@ep",
+            "@iso-security"
+          ],
+          "steps": [
+            {
+              "keyword": "Given",
+              "text": "El administrador del sistema está autenticado pero no tiene permisos para ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "When",
+              "text": "El administrador selecciona la opción de ver imágenes",
+              "data_table": null,
+              "doc_string": null
+            },
+            {
+              "keyword": "Then",
+              "text": "El sistema muestra un mensaje de error de permisos",
+              "data_table": null,
+              "doc_string": null
+            }
+          ],
+          "is_outline": false,
+          "examples": null,
+          "acceptance_criterion_id": "AC-004",
+          "user_story_id": "US-002"
+        }
+      ],
+      "user_story_id": "US-002"
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-001",
+      "scenario_names": [
+        "Subir imagen con éxito",
+        "Subir imagen con formato no permitido",
+        "Subir imagen con tamaño superior al límite",
+        "Subir imagen con formato jpg y tamaño menor a 5MB",
+        "Subir imagen con formato png y tamaño menor a 5MB",
+        "Subir imagen con formato gif y tamaño menor a 5MB"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "boundary",
+        "positive",
+        "positive",
+        "positive"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-001",
+      "criterion_id": "AC-002",
+      "scenario_names": [
+        "Subir imagen con tamaño válido",
+        "Subir imagen con tamaño superior al máximo permitido",
+        "Subir imagen con tamaño en el límite inferior",
+        "Subir imagen con tamaño justo debajo del límite",
+        "Subir imagen con tamaño justo encima del límite",
+        "Subir imagen con tamaño superior al límite"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "boundary",
+        "boundary",
+        "boundary",
+        "boundary"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability"
+      ]
+    },
+    {
+      "user_story_id": "US-002",
+      "criterion_id": "AC-003",
+      "scenario_names": [
+        "Ver imágenes subidas al sistema con éxito",
+        "Ver imágenes subidas al sistema con 0 imágenes",
+        "Ver imágenes subidas al sistema con 1 imagen",
+        "Ver imágenes subidas al sistema con 10 imágenes",
+        "Ver imágenes subidas al sistema con más de 10 imágenes",
+        "Ver imágenes subidas al sistema sin autenticación",
+        "Ver imágenes subidas al sistema sin permisos"
+      ],
+      "coverage_type": [
+        "positive",
+        "boundary",
+        "boundary",
+        "boundary",
+        "boundary",
+        "negative",
+        "negative"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability",
+        "security"
+      ]
+    },
+    {
+      "user_story_id": "US-002",
+      "criterion_id": "AC-004",
+      "scenario_names": [
+        "Ver imágenes subidas al sistema con éxito",
+        "Ver imágenes subidas al sistema sin imágenes",
+        "Ver imágenes subidas al sistema con cero imágenes",
+        "Ver imágenes subidas al sistema con una imagen",
+        "Ver imágenes subidas al sistema sin autenticación",
+        "Ver imágenes subidas al sistema sin permisos"
+      ],
+      "coverage_type": [
+        "positive",
+        "negative",
+        "boundary",
+        "boundary",
+        "negative",
+        "negative"
+      ],
+      "quality_characteristics_covered": [
+        "functional_suitability",
+        "security"
+      ]
+    }
+  ],
+  "review": {
+    "review_status": "approved",
+    "version": 1,
+    "approved_by": "Juan",
+    "approved_at": "2026-06-01T07:59:16.970554",
+    "analyst_feedback": "Ta bien",
+    "change_history": [
+      {
+        "timestamp": "2026-06-01T07:59:16.970418",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con éxito': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970431",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con formato no permitido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970436",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con tamaño superior al límite': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970439",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con formato jpg y tamaño menor a 5MB': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970443",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con formato png y tamaño menor a 5MB': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970447",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con formato gif y tamaño menor a 5MB': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970450",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con tamaño válido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970454",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con tamaño superior al máximo permitido': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970457",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con tamaño en el límite inferior': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970460",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con tamaño justo debajo del límite': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970463",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con tamaño justo encima del límite': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970467",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Subir imagen con tamaño superior al límite': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970470",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con éxito': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970474",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con 0 imágenes': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970477",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con 1 imagen': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970480",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con 10 imágenes': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970483",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con más de 10 imágenes': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970487",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema sin autenticación': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970492",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema sin permisos': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970497",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con éxito': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970501",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema sin imágenes': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970504",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con cero imágenes': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970507",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema con una imagen': clasificación 'functional_suitability' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970510",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema sin autenticación': clasificación 'security' confirmada."
+      },
+      {
+        "timestamp": "2026-06-01T07:59:16.970514",
+        "reviewer": "Juan",
+        "action": "accepted",
+        "notes": "Escenario 'Ver imágenes subidas al sistema sin permisos': clasificación 'security' confirmada."
+      }
+    ]
+  },
+  "total_scenarios": 25,
+  "total_positive": 7,
+  "total_negative": 7,
+  "total_boundary": 11,
+  "uncovered_criteria": [],
+  "coverage_by_characteristic": {
+    "functional_suitability": 21,
+    "performance_efficiency": 0,
+    "compatibility": 0,
+    "usability": 0,
+    "reliability": 0,
+    "security": 4,
+    "maintainability": 0,
+    "portability": 0
+  }
+}

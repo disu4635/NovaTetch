@@ -88,6 +88,7 @@ def generar_acta_pdf(
     output_path: Path,
     resumen: dict,
     matriz_riesgos: dict | None = None,
+    contract_c_data: dict | None = None,
 ) -> Path:
     """Genera el acta PDF. Retorna la ruta del PDF generado."""
     if not _REPORTLAB_OK:
@@ -410,6 +411,192 @@ def generar_acta_pdf(
             ("INNERGRID",     (0, 0), (-1, -1), 0.3, colors.HexColor("#cccccc")),
         ] + alt_r))
         emit(rrt)
+
+    # ── 8. Análisis de código generado (M3-V3) ───────────────────────────────
+    if contract_c_data:
+        emit(Spacer(1, 0.3 * cm))
+        emit(Paragraph("8. ANÁLISIS DE CÓDIGO GENERADO (M3-V3)", s_seccion))
+        emit(Paragraph(
+            f"Pipeline ID del código: {_safe(contract_c_data.get('pipeline_run_id', '—'))} · "
+            f"Agente: {_safe(contract_c_data.get('agent_version', '—'))}",
+            s_normal,
+        ))
+        emit(Spacer(1, 0.2 * cm))
+
+        # Resumen ejecutivo de código
+        cr_data = contract_c_data.get("coverage_report") or {}
+        tm_data = contract_c_data.get("traceability_matrix") or {}
+        qr_data = contract_c_data.get("quality_report") or {}
+        c3_review = contract_c_data.get("review") or {}
+
+        cod_resumen = [
+            ["Módulos generados",      str(contract_c_data.get("total_modules", 0))],
+            ["Tests generados",         str(contract_c_data.get("total_tests", 0))],
+            ["Branch coverage",
+             f"{cr_data.get('branch_coverage_pct', 0):.1f}% "
+             f"({'✓ ≥80%' if cr_data.get('meets_threshold') else '✗ <80%'})"],
+            ["CMMI L3 compliant",
+             "✓ Sin huérfanos" if tm_data.get("cmmi_l3_compliant") else
+             f"✗ {len(tm_data.get('orphan_scenarios', []))} escenario(s) / "
+             f"{len(tm_data.get('orphan_tests', []))} test(s) huérfano(s)"],
+            ["Cobertura de requisitos",
+             f"{tm_data.get('requirements_coverage_pct', 0):.1f}%"],
+            ["Tests justificados",
+             f"{tm_data.get('tests_justified_pct', 0):.1f}%"],
+            ["Funciones sobre umbral CC/CogC",
+             str(qr_data.get("functions_exceeding_threshold", 0))],
+            ["Hallazgos de seguridad (Bandit)",
+             str(len(qr_data.get("security_findings", [])))],
+        ]
+        cod_t = Table(cod_resumen, colWidths=[8 * cm, 8 * cm])
+        cod_t.setStyle(TableStyle([
+            ("FONTNAME",      (0, 0), (-1, -1), "Helvetica"),
+            ("FONTSIZE",      (0, 0), (-1, -1), 9),
+            ("FONTNAME",      (0, 0), (0, -1), "Helvetica-Bold"),
+            ("TEXTCOLOR",     (0, 0), (0, -1), _COLOR_HEADER),
+            ("ROWBACKGROUNDS",(0, 0), (-1, -1), [colors.white, _COLOR_ROW_ALT]),
+            ("TOPPADDING",    (0, 0), (-1, -1), 4),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+            ("BOX",           (0, 0), (-1, -1), 0.5, colors.HexColor("#aaaaaa")),
+            ("INNERGRID",     (0, 0), (-1, -1), 0.3, colors.HexColor("#cccccc")),
+        ]))
+        emit(cod_t)
+        emit(Spacer(1, 0.3 * cm))
+
+        # Módulos generados (lista)
+        modulos = contract_c_data.get("generated_code", [])
+        if modulos:
+            emit(Paragraph("<b>Módulos de código generados:</b>", s_normal))
+            mod_rows = [[
+                Paragraph("<b>Archivo</b>", s_normal),
+                Paragraph("<b>Historia</b>", s_normal),
+                Paragraph("<b>Descripción</b>", s_normal),
+            ]]
+            for m in modulos:
+                mod_rows.append([
+                    Paragraph(_safe(m.get("filename", "")), s_mono),
+                    Paragraph(_safe(m.get("user_story_id", "")), s_mono),
+                    Paragraph(_safe(m.get("description", "")[:120]), s_mono),
+                ])
+            alt_m = [("BACKGROUND", (0, i), (-1, i), _COLOR_ROW_ALT)
+                     for i in range(2, len(mod_rows), 2)]
+            mod_t = Table(mod_rows, colWidths=[4*cm, 2.5*cm, 9.5*cm])
+            mod_t.setStyle(TableStyle([
+                ("FONTNAME",      (0, 0), (-1, -1), "Helvetica"),
+                ("FONTSIZE",      (0, 0), (-1, -1), 8),
+                ("BACKGROUND",    (0, 0), (-1, 0), _COLOR_TABLE_HDR),
+                ("VALIGN",        (0, 0), (-1, -1), "TOP"),
+                ("TOPPADDING",    (0, 0), (-1, -1), 3),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+                ("BOX",           (0, 0), (-1, -1), 0.5, colors.HexColor("#aaaaaa")),
+                ("INNERGRID",     (0, 0), (-1, -1), 0.3, colors.HexColor("#cccccc")),
+            ] + alt_m))
+            emit(mod_t)
+            emit(Spacer(1, 0.2 * cm))
+
+        # Hallazgos de seguridad (si los hay)
+        sec_findings = qr_data.get("security_findings", [])
+        if sec_findings:
+            emit(Paragraph(f"<b>Hallazgos de seguridad ({len(sec_findings)}):</b>", s_normal))
+            sec_rows = [[
+                Paragraph("<b>ID</b>", s_normal),
+                Paragraph("<b>Severidad</b>", s_normal),
+                Paragraph("<b>Módulo</b>", s_normal),
+                Paragraph("<b>Línea</b>", s_normal),
+                Paragraph("<b>Descripción</b>", s_normal),
+            ]]
+            sev_color = {"high": "#a42e2e", "medium": "#c4622d", "low": "#7a6a1a"}
+            for sf in sec_findings:
+                sev = sf.get("severity", "low")
+                hex_c = sev_color.get(sev, "#7a6a1a")
+                sec_rows.append([
+                    Paragraph(_safe(sf.get("test_id", "")), s_mono),
+                    Paragraph(f'<font color="{hex_c}"><b>{_safe(sev.upper())}</b></font>', s_mono),
+                    Paragraph(_safe(sf.get("module", "")), s_mono),
+                    Paragraph(str(sf.get("line_number", "")), s_mono),
+                    Paragraph(_safe(sf.get("description", "")[:140]), s_mono),
+                ])
+            alt_s = [("BACKGROUND", (0, i), (-1, i), _COLOR_ROW_ALT)
+                     for i in range(2, len(sec_rows), 2)]
+            sec_t = Table(sec_rows, colWidths=[1.8*cm, 2*cm, 3*cm, 1.2*cm, 8*cm])
+            sec_t.setStyle(TableStyle([
+                ("FONTNAME",      (0, 0), (-1, -1), "Helvetica"),
+                ("FONTSIZE",      (0, 0), (-1, -1), 7.5),
+                ("BACKGROUND",    (0, 0), (-1, 0), _COLOR_TABLE_HDR),
+                ("VALIGN",        (0, 0), (-1, -1), "TOP"),
+                ("TOPPADDING",    (0, 0), (-1, -1), 3),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+                ("BOX",           (0, 0), (-1, -1), 0.5, colors.HexColor("#aaaaaa")),
+                ("INNERGRID",     (0, 0), (-1, -1), 0.3, colors.HexColor("#cccccc")),
+            ] + alt_s))
+            emit(sec_t)
+            emit(Spacer(1, 0.2 * cm))
+
+        # Revisión del desarrollador senior
+        emit(Paragraph("<b>Revisión del desarrollador senior:</b>", s_normal))
+        c3_status = c3_review.get("review_status", "pending_review")
+        c3_status_label = {
+            "approved":       "APROBADO",
+            "rejected":       "RECHAZADO",
+            "needs_changes":  "CAMBIOS SOLICITADOS",
+            "pending_review": "PENDIENTE",
+        }.get(c3_status, c3_status.upper())
+        c3_color = {
+            "approved": "#1a7a3c", "rejected": "#a42e2e",
+            "needs_changes": "#7a6a1a", "pending_review": "#7a6a1a",
+        }.get(c3_status, "#7a6a1a")
+
+        sr_data = [
+            ["Revisor senior",    _safe(c3_review.get("approved_by") or "(no registrado)")],
+            ["Veredicto",
+             Paragraph(f'<font color="{c3_color}"><b>{c3_status_label}</b></font>', s_normal)],
+            ["Feedback",          _safe(c3_review.get("reviewer_feedback") or "(sin observaciones)")],
+        ]
+        sr_t = Table(sr_data, colWidths=[5*cm, 11*cm])
+        sr_t.setStyle(TableStyle([
+            ("FONTNAME",      (0, 0), (-1, -1), "Helvetica"),
+            ("FONTSIZE",      (0, 0), (-1, -1), 9),
+            ("FONTNAME",      (0, 0), (0, -1), "Helvetica-Bold"),
+            ("TEXTCOLOR",     (0, 0), (0, -1), _COLOR_HEADER),
+            ("TOPPADDING",    (0, 0), (-1, -1), 4),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+            ("BOX",           (0, 0), (-1, -1), 0.5, colors.HexColor("#aaaaaa")),
+            ("INNERGRID",     (0, 0), (-1, -1), 0.3, colors.HexColor("#cccccc")),
+        ]))
+        emit(sr_t)
+
+        # Historial de acciones del revisor senior
+        c3_history = c3_review.get("change_history", [])
+        if c3_history:
+            emit(Spacer(1, 0.2 * cm))
+            emit(Paragraph("<b>Historial de acciones del revisor senior:</b>", s_normal))
+            ch_rows = [[
+                Paragraph("<b>#</b>", s_normal),
+                Paragraph("<b>Módulo/Target</b>", s_normal),
+                Paragraph("<b>Acción</b>", s_normal),
+                Paragraph("<b>Notas</b>", s_normal),
+            ]]
+            for i, chg in enumerate(c3_history, 1):
+                ch_rows.append([
+                    Paragraph(str(i), s_mono),
+                    Paragraph(_safe(chg.get("target") or "—"), s_mono),
+                    Paragraph(_safe(chg.get("action", "")), s_mono),
+                    Paragraph(_safe((chg.get("notes") or "")[:120]), s_mono),
+                ])
+            alt_ch = [("BACKGROUND", (0, i), (-1, i), _COLOR_ROW_ALT)
+                      for i in range(2, len(ch_rows), 2)]
+            ch_t = Table(ch_rows, colWidths=[0.8*cm, 4*cm, 3*cm, 8.2*cm])
+            ch_t.setStyle(TableStyle([
+                ("FONTNAME",      (0, 0), (-1, -1), "Helvetica"),
+                ("FONTSIZE",      (0, 0), (-1, -1), 7.5),
+                ("BACKGROUND",    (0, 0), (-1, 0), _COLOR_TABLE_HDR),
+                ("VALIGN",        (0, 0), (-1, -1), "TOP"),
+                ("TOPPADDING",    (0, 0), (-1, -1), 3),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+                ("BOX",           (0, 0), (-1, -1), 0.5, colors.HexColor("#aaaaaa")),
+                ("INNERGRID",     (0, 0), (-1, -1), 0.3, colors.HexColor("#cccccc")),
+            ] + alt_ch))
+            emit(ch_t)
 
     # ── 7. Firmas ────────────────────────────────────────────────────────────
     emit(Spacer(1, 0.6 * cm))
