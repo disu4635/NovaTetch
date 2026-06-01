@@ -13,4 +13,18 @@
     color: #e2e8f0;
     min-height: 100vh;
   }
+
+  /* Keyboard focus ring for all buttons that don't opt out */
+  button:focus-visible {
+    outline: 2px solid #8b5cf6;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }

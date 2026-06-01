@@ -46,8 +46,8 @@ export default function RiskMatrix({ matrix, onDownloadPdf }: Props) {
             { label: 'Bajo',    count: res.bajos,    color: 'bg-green-700/30 border-green-700/50 text-green-300' },
           ].map(item => (
             <div key={item.label} className={`rounded-xl border p-4 text-center ${item.color}`}>
-              <p className="text-3xl font-bold">{item.count}</p>
-              <p className="text-xs mt-1 uppercase tracking-wider">{item.label}</p>
+              <p className="text-xl font-semibold tabular-nums">{item.count}</p>
+              <p className="text-xs mt-1">{item.label}</p>
             </div>
           ))}
         </div>

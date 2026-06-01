@@ -14,18 +14,18 @@ export default function CodeGenPanel({ onStart, loading, progressMsg }: Props) {
           <Code2 className="h-5 w-5 text-emerald-400" />
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-white mb-1">Generación de Código (M3-V3)</h3>
+          <h3 className="font-semibold text-white mb-1">Generación de código</h3>
           <p className="text-sm text-slate-400 mb-4">
-            Genera código Python de implementación y tests Pytest a partir de los escenarios Gherkin
-            revisados. Incluye análisis estático (CC, CogC, MI, seguridad), trazabilidad CMMI L3
-            y medición de branch coverage.
+            Genera implementaciones Python y tests Pytest a partir de los escenarios aprobados.
+            Incluye análisis estático (complejidad ciclomática, cognitiva e índice de mantenibilidad),
+            cobertura de ramas y trazabilidad CMMI L3.
           </p>
 
           {loading ? (
             <div className="flex items-center gap-3">
               <Loader2 className="h-5 w-5 text-emerald-400 animate-spin shrink-0" />
               <div>
-                <p className="text-sm font-medium text-emerald-300">Ejecutando pipeline V3...</p>
+                <p className="text-sm font-medium text-emerald-300">Generando código y tests...</p>
                 {progressMsg && (
                   <p className="text-xs text-slate-500 mt-0.5">{progressMsg}</p>
                 )}

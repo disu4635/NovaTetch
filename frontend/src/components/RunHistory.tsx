@@ -18,12 +18,13 @@ export default function RunHistory({ runs, onSelect, onDelete }: Props) {
 
   const handleDelete = (e: React.MouseEvent, runId: string) => {
     e.stopPropagation()
+    if (!window.confirm('¿Eliminar este análisis del historial? No podrás recuperarlo.')) return
     onDelete(runId)
   }
 
   return (
     <div>
-      <h3 className="text-sm font-semibold text-slate-400 mb-3 uppercase tracking-wider">
+      <h3 className="text-sm font-medium text-slate-500 mb-3">
         Historial reciente
       </h3>
       <div className="flex flex-col gap-2">
@@ -55,11 +56,12 @@ export default function RunHistory({ runs, onSelect, onDelete }: Props) {
             </button>
 
             <button
+              type="button"
               onClick={e => handleDelete(e, run.run_id)}
-              title="Eliminar"
+              aria-label="Eliminar análisis"
               className="shrink-0 mr-3 p-1.5 rounded-lg text-slate-600 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer opacity-0 group-hover:opacity-100"
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" aria-hidden />
             </button>
           </div>
         ))}

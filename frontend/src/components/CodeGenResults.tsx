@@ -17,7 +17,6 @@ const STATUS_LABEL: Record<string, string> = {
 
 interface Props {
   contractC: ContractC
-  codegenRunId: string
   onDownloadCode: () => void
 }
 
@@ -108,8 +107,8 @@ export default function CodeGenResults({ contractC, onDownloadCode }: Props) {
           {/* Funciones sobre umbral */}
           {qr.function_metrics.length > 0 && (
             <>
-              <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">
-                Métricas por función ({qr.functions_exceeding_threshold} sobre umbral)
+              <p className="text-xs font-medium text-slate-400 mb-2">
+                Métricas por función — {qr.functions_exceeding_threshold} sobre umbral
               </p>
               <div className="flex flex-col gap-1 max-h-40 overflow-y-auto">
                 {qr.function_metrics.map((fm, i) => (
@@ -127,8 +126,8 @@ export default function CodeGenResults({ contractC, onDownloadCode }: Props) {
           {/* Hallazgos de seguridad */}
           {qr.security_findings.length > 0 && (
             <div className="mt-4">
-              <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">
-                Hallazgos de seguridad ({qr.security_findings.length})
+              <p className="text-xs font-medium text-slate-400 mb-2">
+                Hallazgos de seguridad — {qr.security_findings.length} encontrados
               </p>
               <div className="flex flex-col gap-1">
                 {qr.security_findings.map((sf, i) => (
@@ -199,7 +198,7 @@ export default function CodeGenResults({ contractC, onDownloadCode }: Props) {
       {/* Feedback del revisor */}
       {review.reviewer_feedback && (
         <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 px-5 py-4">
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Feedback del revisor senior</p>
+          <p className="text-xs font-medium text-slate-500 mb-1">Feedback del revisor senior</p>
           <p className="text-sm text-slate-300">{review.reviewer_feedback}</p>
         </div>
       )}

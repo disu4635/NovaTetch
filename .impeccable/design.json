@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-01T00:00:00Z",
+  "title": "Design System: NovaTetch",
+  "extensions": {
+    "colorMeta": {
+      "surface-deep":           { "role": "neutral",   "displayName": "Surface Deep",           "canonical": "#020617", "tonalRamp": ["#020617","#0f172a","#1e293b","#334155","#475569","#64748b","#94a3b8","#e2e8f0"] },
+      "surface-base":           { "role": "neutral",   "displayName": "Surface Base",           "canonical": "#0f172a", "tonalRamp": ["#020617","#0f172a","#1e293b","#334155","#475569","#64748b","#94a3b8","#e2e8f0"] },
+      "surface-raised":         { "role": "neutral",   "displayName": "Surface Raised",         "canonical": "#1e293b", "tonalRamp": ["#020617","#0f172a","#1e293b","#334155","#475569","#64748b","#94a3b8","#e2e8f0"] },
+      "border-default":         { "role": "neutral",   "displayName": "Border Default",         "canonical": "#334155", "tonalRamp": ["#020617","#0f172a","#1e293b","#334155","#475569","#64748b","#94a3b8","#e2e8f0"] },
+      "text-primary":           { "role": "neutral",   "displayName": "Text Primary",           "canonical": "#ffffff", "tonalRamp": ["#1e293b","#334155","#475569","#64748b","#94a3b8","#cbd5e1","#e2e8f0","#ffffff"] },
+      "text-secondary":         { "role": "neutral",   "displayName": "Text Secondary",         "canonical": "#e2e8f0", "tonalRamp": ["#1e293b","#334155","#475569","#64748b","#94a3b8","#cbd5e1","#e2e8f0","#ffffff"] },
+      "text-muted":             { "role": "neutral",   "displayName": "Text Muted",             "canonical": "#94a3b8", "tonalRamp": ["#1e293b","#334155","#475569","#64748b","#94a3b8","#cbd5e1","#e2e8f0","#ffffff"] },
+      "text-faint":             { "role": "neutral",   "displayName": "Text Faint",             "canonical": "#64748b", "tonalRamp": ["#1e293b","#334155","#475569","#64748b","#94a3b8","#cbd5e1","#e2e8f0","#ffffff"] },
+      "inference-violet":       { "role": "primary",   "displayName": "Inference Violet",       "canonical": "#7c3aed", "tonalRamp": ["#1a0545","#2e0c78","#4c1d95","#5b21b6","#6d28d9","#7c3aed","#8b5cf6","#a78bfa"] },
+      "inference-violet-hover": { "role": "primary",   "displayName": "Inference Violet Hover", "canonical": "#8b5cf6", "tonalRamp": ["#1a0545","#2e0c78","#4c1d95","#5b21b6","#6d28d9","#7c3aed","#8b5cf6","#a78bfa"] },
+      "inference-violet-soft":  { "role": "primary",   "displayName": "Inference Violet Soft",  "canonical": "#a78bfa", "tonalRamp": ["#1a0545","#2e0c78","#4c1d95","#5b21b6","#6d28d9","#7c3aed","#8b5cf6","#a78bfa"] },
+      "pipeline-emerald":       { "role": "secondary", "displayName": "Pipeline Emerald",       "canonical": "#10b981", "tonalRamp": ["#022c22","#064e3b","#065f46","#047857","#059669","#10b981","#34d399","#6ee7b7"] },
+      "risk-critical":          { "role": "tertiary",  "displayName": "Risk Critical",          "canonical": "#ef4444", "tonalRamp": ["#450a0a","#7f1d1d","#991b1b","#b91c1c","#dc2626","#ef4444","#f87171","#fca5a5"] },
+      "risk-high":              { "role": "tertiary",  "displayName": "Risk High",              "canonical": "#ea580c", "tonalRamp": ["#431407","#7c2d12","#9a3412","#c2410c","#ea580c","#f97316","#fb923c","#fdba74"] },
+      "risk-medium":            { "role": "tertiary",  "displayName": "Risk Medium",            "canonical": "#ca8a04", "tonalRamp": ["#422006","#713f12","#854d0e","#a16207","#ca8a04","#eab308","#fbbf24","#fde68a"] },
+      "risk-low":               { "role": "tertiary",  "displayName": "Risk Low",               "canonical": "#15803d", "tonalRamp": ["#052e16","#14532d","#166534","#15803d","#16a34a","#22c55e","#4ade80","#86efac"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero heading en estado idle. Una sola ocurrencia por sesión." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección y paneles del pipeline." },
+      "body":     { "displayName": "Body",     "purpose": "Contenido principal, narrativas de historia, descripciones." },
+      "label":    { "displayName": "Label",    "purpose": "Metadata, conteos, timestamps, nombres de campo." },
+      "mono":     { "displayName": "Mono",     "purpose": "IDs del sistema (US-001, AC-001), valores de datos de prueba." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "state-transition", "value": "150ms ease-in-out", "purpose": "Hover states de botones, tarjetas, links. Velocidad: perceptible pero instantáneo." },
+      { "name": "spinner-rotate",   "value": "linear 1s infinite", "purpose": "Indicadores de progreso del pipeline. Constante, nunca acelerado." },
+      { "name": "chevron-rotate",   "value": "transform 200ms ease-in-out", "purpose": "Flecha del acordeón en Story Cards." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px",  "purpose": "Grid de estadísticas pasa a 2 columnas." },
+      { "name": "md", "value": "768px",  "purpose": "Layout base responsive." },
+      { "name": "lg", "value": "1024px", "purpose": "max-w-5xl para contenido central." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botón de acción principal del paso actual del pipeline. Máximo uno visible.",
+      "html": "<button class=\"ds-btn-primary\">Analizar requerimiento</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #7c3aed; color: #ffffff; padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600; font-family: system-ui, -apple-system, sans-serif; border: none; cursor: pointer; transition: background-color 150ms ease-in-out; line-height: 1; } .ds-btn-primary:hover { background: #8b5cf6; } .ds-btn-primary:focus-visible { outline: 2px solid #a78bfa; outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Primary Button Small",
+      "kind": "button",
+      "refersTo": "button-sm",
+      "description": "Botón primario dentro de cards o paneles. Acción contextual, no global.",
+      "html": "<button class=\"ds-btn-sm\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18\"/></svg>Iniciar análisis</button>",
+      "css": ".ds-btn-sm { display: inline-flex; align-items: center; gap: 8px; background: #7c3aed; color: #ffffff; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; font-family: system-ui, -apple-system, sans-serif; border: none; cursor: pointer; transition: background-color 150ms ease-in-out; line-height: 1; } .ds-btn-sm:hover { background: #8b5cf6; } .ds-btn-sm:focus-visible { outline: 2px solid #a78bfa; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Destructive Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Acción destructiva secundaria. Invisible en reposo, aparece en hover del contenedor padre.",
+      "html": "<button class=\"ds-btn-ghost\" title=\"Eliminar\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2\"/></svg></button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border-radius: 8px; border: none; background: transparent; color: #64748b; cursor: pointer; transition: color 150ms ease-in-out, background-color 150ms ease-in-out; opacity: 0; } .ds-btn-ghost:hover { color: #f87171; background: rgba(239, 68, 68, 0.1); } .ds-btn-ghost:focus-visible { opacity: 1; outline: 2px solid #a78bfa; outline-offset: 2px; }"
+    },
+    {
+      "name": "Card Default",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Contenedor estándar de sección. Base de toda la UI de pipeline.",
+      "html": "<div class=\"ds-card\"><p class=\"ds-card__label\">Requerimiento</p><p class=\"ds-card__body\">Necesito un sistema de login seguro para usuarios que gestione permisos de forma eficiente...</p></div>",
+      "css": ".ds-card { background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 16px; padding: 24px; font-family: system-ui, -apple-system, sans-serif; } .ds-card__label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #64748b; margin-bottom: 12px; margin-top: 0; } .ds-card__body { font-size: 14px; color: #e2e8f0; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Textarea Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Campo de entrada para el requerimiento en lenguaje natural. El único input primario de la app.",
+      "html": "<textarea class=\"ds-input\" rows=\"5\" placeholder=\"Ej: Necesito un sistema de login seguro para usuarios que gestione permisos de forma eficiente...\"></textarea>",
+      "css": ".ds-input { display: block; width: 100%; background: rgba(30, 41, 59, 0.6); border: 1px solid #334155; border-radius: 12px; padding: 16px; font-size: 16px; color: #f1f5f9; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; resize: none; outline: none; box-sizing: border-box; } .ds-input::placeholder { color: #64748b; } .ds-input:focus { box-shadow: 0 0 0 2px #7c3aed; border-color: #7c3aed; }"
+    },
+    {
+      "name": "System ID Badge",
+      "kind": "chip",
+      "refersTo": "badge-accent",
+      "description": "Badge de identificador del sistema. Monoespaciado, violet. Diferencia dato-del-sistema de texto natural.",
+      "html": "<span class=\"ds-badge-id\">US-001</span>",
+      "css": ".ds-badge-id { display: inline-block; background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 4px 10px; font-family: ui-monospace, SFMono-Regular, 'Cascadia Code', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0; line-height: 1; }"
+    },
+    {
+      "name": "Priority Badge — Critical",
+      "kind": "chip",
+      "description": "Badge de prioridad crítica. Pill shape, texto red. Siempre con borde del mismo color.",
+      "html": "<span class=\"ds-badge-critical\">Crítica</span>",
+      "css": ".ds-badge-critical { display: inline-block; background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 9999px; padding: 2px 8px; font-size: 12px; font-weight: 500; font-family: system-ui, -apple-system, sans-serif; line-height: 1.4; }"
+    },
+    {
+      "name": "Navigation Header",
+      "kind": "nav",
+      "description": "Header sticky de la app. Backdrop blur funcional. Brand mark con violet saturado.",
+      "html": "<header class=\"ds-nav\"><div class=\"ds-nav__brand\"><div class=\"ds-nav__icon\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\"/><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"/><path d=\"M15 2v2M15 20v2M2 15h2M20 15h2M2 9h2M20 9h2M9 2v2M9 20v2\"/></svg></div><div><p class=\"ds-nav__title\">NovaTetch</p><p class=\"ds-nav__subtitle\">Requirements Refiner + QualityAI</p></div></div></header>",
+      "css": ".ds-nav { width: 100%; border-bottom: 1px solid #1e293b; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; font-family: system-ui, -apple-system, sans-serif; box-sizing: border-box; } .ds-nav__brand { display: flex; align-items: center; gap: 12px; } .ds-nav__icon { width: 32px; height: 32px; border-radius: 8px; background: #7c3aed; display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0; } .ds-nav__title { font-size: 14px; font-weight: 700; color: #ffffff; line-height: 1; margin: 0; } .ds-nav__subtitle { font-size: 12px; color: #94a3b8; line-height: 1.4; margin: 2px 0 0 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Clarity Engine",
+    "overview": "NovaTetch existe para hacer una cosa: convertir lo ambiguo en lo preciso. El sistema visual refleja este proceso. No hay decoración. Cada elemento está donde está porque cumple una función en el pipeline de análisis. La interfaz no compite con el contenido — la jerarquía del análisis habla, la chrome se calla.\n\nEl tema es oscuro por razones concretas: los analistas que usan esta herramienta trabajan en entornos técnicos, con múltiples pantallas, a menudo por horas. Un fondo oscuro reduce la fatiga visual y crea contraste para las señales de estado. El modo claro existe como ciudadano de primera clase para ambientes distintos.\n\nLa densidad es deliberada. El sistema no esconde información detrás de tooltips ni la pagina artificialmente. La profundidad se construye con capas de opacidad sobre una paleta de slate — sin sombras, sin glassmorphism, sin efectos que no aporten información.",
+    "keyCharacteristics": [
+      "Plano por diseño: sin sombras, profundidad solo por opacidad y borde",
+      "El acento violet aparece en menos del 15% de cualquier pantalla — su escasez es su fuerza",
+      "El emerald solo marca el flujo de éxito/codegen; nunca compite con el violet",
+      "Tipografía del sistema: sin fuentes personalizadas cargadas, velocidad sobre expresividad",
+      "Estado del pipeline siempre inequívoco: el usuario nunca duda en qué fase está"
+    ],
+    "rules": [
+      { "name": "La Regla del Acento Único",       "body": "Inference Violet (#7c3aed) es el único color que puede iniciar una acción. Si un botón no es la acción principal, no lleva violet.",                                                   "section": "colors" },
+      { "name": "La Regla de la Señal Funcional",  "body": "Los colores de estado (risk-critical, risk-high, risk-medium, risk-low, pipeline-emerald) son informativos, no decorativos. Nunca se usan para variedad visual.",                             "section": "colors" },
+      { "name": "La Regla del Mono Semántico",     "body": "La fuente monoespaciada se usa solo cuando el contenido ES un dato del sistema: un ID, un valor de test, un límite numérico.",                                                              "section": "typography" },
+      { "name": "La Regla de la Tinta Sin Sombra", "body": "Si el diseño necesita una sombra para parecer elevado, el problema real es que la jerarquía de superficie está mal construida. Resolver con opacidad y borde, nunca con box-shadow.",        "section": "elevation" },
+      { "name": "La Regla de Sin Anidación Decorativa", "body": "Los cards no se anidan para crear jerarquía visual. El bloque interno usa tono de bg más oscuro (bg-slate-900/50), no un nuevo contenedor con border y padding propios.",              "section": "components" }
+    ],
+    "dos": [
+      "Do usar bg-violet-600 exclusivamente para el botón de la acción principal del paso actual del pipeline. Un botón primary por pantalla visible.",
+      "Do usar bg-slate-800/40 con border border-slate-700 como el tratamiento estándar de contenedor.",
+      "Do representar todos los IDs del sistema (US-001, AC-001, run IDs) con fuente mono en text-violet-400.",
+      "Do construir profundidad con tonos de slate y opacidad. Subir al siguiente nivel de superficie significa ir a un tono más oscuro de bg.",
+      "Do mantener el emerald exclusivo del flujo codegen y éxito de pipeline.",
+      "Do usar transition-colors de 150ms como duración estándar para hover states.",
+      "Do incluir cursor-pointer explícito en todos los elementos interactivos que no son <a> o <button> nativo."
+    ],
+    "donts": [
+      "Don't usar box-shadow en ningún componente. El sistema es plano.",
+      "Don't crear SaaS oscuro genérico con gradientes violet y glow effects — el cliché de herramienta de IA 2024.",
+      "Don't mostrar métricas enormes en hero (big-number + label + gradiente acento).",
+      "Don't usar uppercase tracking amplio como estructura de página — solo en labels de campo como metadata.",
+      "Don't usar glassmorphism. El backdrop-blur del header es la única excepción, y existe por razón funcional.",
+      "Don't anidar cards dentro de cards para crear jerarquía.",
+      "Don't usar gradientes de texto (background-clip: text). Texto con acento va en text-violet-400 sólido.",
+      "Don't usar colores de estado para decoración visual.",
+      "Don't usar border-left > 1px como stripe decorativo en cards o items de lista."
+    ]
+  }
+}

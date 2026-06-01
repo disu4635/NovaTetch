@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { ChevronDown, Copy, CheckCheck } from 'lucide-react'
 import type { UserStory } from '../types'
 
 interface Props {
   story: UserStory
   index: number
+  isExpanded?: boolean
+  onToggle?: () => void
 }
 
 const priorityConfig = {
@@ -19,15 +22,50 @@ const typeConfig = {
   technical:      { color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30', label: 'Técnica' },
 }
 
-export default function StoryCard({ story, index }: Props) {
-  const [open, setOpen] = useState(index === 0)
+function copyStoryText(story: UserStory): string {
+  const criteria = story.acceptance_criteria.map((ac, i) =>
+    `${i + 1}. ${ac.description}\n   Given ${ac.given}\n   When ${ac.when}\n   Then ${ac.then}`
+  ).join('\n\n')
+
+  return [
+    `[${story.id}] ${story.title}`,
+    ``,
+    `Como ${story.as_a}`,
+    `Quiero ${story.i_want}`,
+    `Para que ${story.so_that}`,
+    ``,
+    `Criterios de aceptación:`,
+    criteria,
+  ].join('\n')
+}
+
+export default function StoryCard({ story, index, isExpanded, onToggle }: Props) {
+  const [internalOpen, setInternalOpen] = useState(index === 0)
+  const [copied, setCopied] = useState(false)
+
+  const controlled = isExpanded !== undefined
+  const open = controlled ? isExpanded : internalOpen
+
+  const toggle = () => {
+    if (controlled) onToggle?.()
+    else setInternalOpen(o => !o)
+  }
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    await navigator.clipboard.writeText(copyStoryText(story))
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <div className="rounded-2xl border border-slate-700 bg-slate-800/50 overflow-hidden">
       {/* Header */}
       <button
+        type="button"
         className="cursor-pointer w-full flex items-center justify-between p-5 text-left hover:bg-slate-700/30 transition-colors"
-        onClick={() => setOpen(o => !o)}
+        onClick={toggle}
+        aria-expanded={open}
       >
         <div className="flex items-center gap-3 min-w-0">
           <span className="shrink-0 rounded-lg bg-violet-500/20 px-2.5 py-1 text-xs font-mono font-bold text-violet-300 border border-violet-500/30">
@@ -42,12 +80,21 @@ export default function StoryCard({ story, index }: Props) {
           <span className={`rounded-full px-2 py-0.5 text-xs font-medium border ${typeConfig[story.story_type].color}`}>
             {typeConfig[story.story_type].label}
           </span>
-          <svg
-            className={`h-4 w-4 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`}
-            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="cursor-pointer rounded-lg p-1.5 text-slate-500 hover:text-slate-300 hover:bg-slate-700/50 transition-colors"
+            aria-label={copied ? 'Historia copiada' : 'Copiar historia al portapapeles'}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+            {copied
+              ? <CheckCheck className="h-3.5 w-3.5 text-emerald-400" aria-hidden />
+              : <Copy className="h-3.5 w-3.5" aria-hidden />
+            }
+          </button>
+          <ChevronDown
+            className={`h-4 w-4 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`}
+            aria-hidden
+          />
         </div>
       </button>
 

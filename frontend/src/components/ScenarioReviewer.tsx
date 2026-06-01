@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, RefreshCw, MessageSquare, ChevronDown, ChevronRight } from 'lucide-react'
+import { Check, RefreshCw, MessageSquare, ChevronDown, ChevronRight, CheckCheck } from 'lucide-react'
 import type { ContractB, GherkinScenario, QualityCharacteristic, ScenarioDecision } from '../types'
 
 const QC_OPTIONS: { value: QualityCharacteristic; label: string }[] = [
@@ -67,10 +67,15 @@ function ScenarioCard({
       {/* Header */}
       <div className="flex items-start gap-3">
         <button
+          type="button"
           onClick={() => setExpanded(v => !v)}
+          aria-expanded={expanded}
+          aria-label={expanded ? 'Colapsar pasos' : 'Expandir pasos'}
           className="cursor-pointer mt-0.5 text-slate-400 hover:text-slate-200"
         >
-          {expanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+          {expanded
+            ? <ChevronDown className="h-4 w-4" aria-hidden />
+            : <ChevronRight className="h-4 w-4" aria-hidden />}
         </button>
 
         <div className="flex-1 min-w-0">
@@ -102,6 +107,7 @@ function ScenarioCard({
           {/* Action buttons */}
           <div className="flex flex-wrap gap-2">
             <button
+              type="button"
               onClick={() => onChange({ action: 'accepted' })}
               className={`cursor-pointer inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
                 state.action === 'accepted'
@@ -109,9 +115,10 @@ function ScenarioCard({
                   : 'bg-slate-700/50 text-slate-300 hover:bg-green-600/30'
               }`}
             >
-              <Check className="h-3 w-3" /> Aceptar
+              <Check className="h-3 w-3" aria-hidden /> Aceptar
             </button>
             <button
+              type="button"
               onClick={() =>
                 onChange({ action: 'reclassified', newQc: scenario.quality_characteristic })
               }
@@ -121,9 +128,10 @@ function ScenarioCard({
                   : 'bg-slate-700/50 text-slate-300 hover:bg-yellow-600/30'
               }`}
             >
-              <RefreshCw className="h-3 w-3" /> Reclasificar
+              <RefreshCw className="h-3 w-3" aria-hidden /> Reclasificar
             </button>
             <button
+              type="button"
               onClick={() => onChange({ action: 'comment' })}
               className={`cursor-pointer inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
                 state.action === 'comment'
@@ -131,7 +139,7 @@ function ScenarioCard({
                   : 'bg-slate-700/50 text-slate-300 hover:bg-blue-600/30'
               }`}
             >
-              <MessageSquare className="h-3 w-3" /> Comentar
+              <MessageSquare className="h-3 w-3" aria-hidden /> Comentar
             </button>
           </div>
 
@@ -183,21 +191,31 @@ export default function ScenarioReviewer({ contractB, onSubmit, submitting }: Pr
   const allScenarios = contractB.features.flatMap(f => f.scenarios)
 
   const [states, setStates] = useState<Record<string, ScenarioState>>(() =>
-    Object.fromEntries(allScenarios.map(s => [s.name, { action: 'accepted' as ActionType }]))
+    Object.fromEntries(allScenarios.map(s => [s.acceptance_criterion_id, { action: 'accepted' as ActionType }]))
   )
+  const [reviewStarted, setReviewStarted] = useState(false)
   const [reviewer, setReviewer] = useState('')
   const [feedback, setFeedback] = useState('')
   const [reviewStatus, setReviewStatus] = useState('approved')
   const [useLlmRisk, setUseLlmRisk] = useState(true)
 
-  const handleChange = (name: string, s: ScenarioState) =>
-    setStates(prev => ({ ...prev, [name]: s }))
+  const handleChange = (id: string, s: ScenarioState) => {
+    setReviewStarted(true)
+    setStates(prev => ({ ...prev, [id]: s }))
+  }
+
+  const acceptAll = () => {
+    setReviewStarted(true)
+    setStates(Object.fromEntries(
+      allScenarios.map(s => [s.acceptance_criterion_id, { action: 'accepted' as ActionType }])
+    ))
+  }
 
   const handleSubmit = () => {
     const decisions: ScenarioDecision[] = allScenarios
-      .filter(s => states[s.name]?.action !== null)
+      .filter(s => states[s.acceptance_criterion_id]?.action !== null)
       .map(s => {
-        const st = states[s.name]
+        const st = states[s.acceptance_criterion_id]
         return {
           scenario_name: s.name,
           action: st.action!,
@@ -208,33 +226,45 @@ export default function ScenarioReviewer({ contractB, onSubmit, submitting }: Pr
     onSubmit(decisions, reviewer, feedback, reviewStatus, useLlmRisk)
   }
 
-  const n_reviewed = allScenarios.filter(s => states[s.name]?.action !== null).length
-  const canSubmit = reviewer.trim().length > 0 && !submitting
+  const n_reviewed = allScenarios.filter(s => states[s.acceptance_criterion_id]?.action !== null).length
+  const canSubmit = reviewer.trim().length > 0 && !submitting && reviewStarted
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Header stats */}
-      <div className="flex flex-wrap gap-6 rounded-2xl border border-slate-700 bg-slate-800/40 px-6 py-4">
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Total escenarios</p>
-          <p className="text-2xl font-bold text-white">{allScenarios.length}</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Revisados</p>
-          <p className="text-2xl font-bold text-violet-400">{n_reviewed}</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Features</p>
-          <p className="text-2xl font-bold text-white">{contractB.features.length}</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Positivos</p>
-          <p className="text-2xl font-bold text-green-400">{contractB.total_positive}</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Negativos</p>
-          <p className="text-2xl font-bold text-red-400">{contractB.total_negative}</p>
-        </div>
+      {/* Header stats — compact inline row */}
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm pb-4 border-b border-slate-800/80">
+        <span>
+          <span className="font-semibold tabular-nums text-slate-200">{allScenarios.length}</span>
+          <span className="text-slate-500 ml-1.5">escenarios</span>
+        </span>
+        <span className="text-slate-700" aria-hidden>·</span>
+        <span>
+          <span className="font-semibold tabular-nums text-slate-200">{contractB.features.length}</span>
+          <span className="text-slate-500 ml-1.5">features</span>
+        </span>
+        <span className="text-slate-700" aria-hidden>·</span>
+        <span>
+          <span className="font-semibold tabular-nums text-green-400">{contractB.total_positive}</span>
+          <span className="text-slate-500 ml-1.5">positivos</span>
+        </span>
+        <span className="text-slate-700" aria-hidden>·</span>
+        <span>
+          <span className="font-semibold tabular-nums text-red-400">{contractB.total_negative}</span>
+          <span className="text-slate-500 ml-1.5">negativos</span>
+        </span>
+        <span className="text-slate-700" aria-hidden>·</span>
+        <span>
+          <span className="font-semibold tabular-nums text-violet-400">{n_reviewed}</span>
+          <span className="text-slate-500 ml-1.5">revisados</span>
+        </span>
+        <button
+          type="button"
+          onClick={acceptAll}
+          className="cursor-pointer ml-auto inline-flex items-center gap-2 rounded-lg bg-green-600/15 border border-green-500/25 px-3 py-1.5 text-sm font-medium text-green-400 hover:bg-green-600/25 transition-colors"
+        >
+          <CheckCheck className="h-3.5 w-3.5" />
+          Aceptar todos
+        </button>
       </div>
 
       {/* Escenarios agrupados por feature */}
@@ -247,10 +277,10 @@ export default function ScenarioReviewer({ contractB, onSubmit, submitting }: Pr
           <div className="flex flex-col gap-2 pl-2">
             {feature.scenarios.map(sc => (
               <ScenarioCard
-                key={sc.name}
+                key={sc.acceptance_criterion_id}
                 scenario={sc}
-                state={states[sc.name] ?? { action: null }}
-                onChange={s => handleChange(sc.name, s)}
+                state={states[sc.acceptance_criterion_id] ?? { action: null }}
+                onChange={s => handleChange(sc.acceptance_criterion_id, s)}
               />
             ))}
           </div>
@@ -261,9 +291,15 @@ export default function ScenarioReviewer({ contractB, onSubmit, submitting }: Pr
       <div className="rounded-2xl border border-slate-700 bg-slate-800/40 p-6 flex flex-col gap-4">
         <h4 className="font-semibold text-white">Decisión global del analista</h4>
 
+        {!reviewStarted && (
+          <p className="text-sm text-amber-400/80 bg-amber-500/10 border border-amber-500/20 rounded-lg px-4 py-3">
+            Revisa al menos un escenario o usa "Aceptar todos" para habilitar el envío.
+          </p>
+        )}
+
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-slate-400 uppercase tracking-wider">
-            Identificador del revisor *
+          <label className="text-sm text-slate-400">
+            Identificador del revisor <span className="text-slate-600">*</span>
           </label>
           <input
             type="text"
@@ -275,8 +311,8 @@ export default function ScenarioReviewer({ contractB, onSubmit, submitting }: Pr
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-slate-400 uppercase tracking-wider">
-            Comentario global (opcional)
+          <label className="text-sm text-slate-400">
+            Comentario global <span className="text-slate-600">(opcional)</span>
           </label>
           <textarea
             rows={2}
@@ -288,12 +324,12 @@ export default function ScenarioReviewer({ contractB, onSubmit, submitting }: Pr
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs text-slate-400 uppercase tracking-wider">Decisión final</label>
+          <label className="text-sm text-slate-400">Decisión final</label>
           <div className="flex flex-wrap gap-3">
             {[
-              { value: 'approved',      label: 'Aprobar',           color: 'green' },
-              { value: 'needs_changes', label: 'Pedir cambios',     color: 'yellow' },
-              { value: 'rejected',      label: 'Rechazar',          color: 'red' },
+              { value: 'approved',      label: 'Aprobar',       color: 'green' },
+              { value: 'needs_changes', label: 'Pedir cambios', color: 'yellow' },
+              { value: 'rejected',      label: 'Rechazar',      color: 'red' },
             ].map(opt => (
               <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
                 <input

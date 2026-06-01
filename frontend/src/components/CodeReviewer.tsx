@@ -210,52 +210,58 @@ export default function CodeReviewer({ contractC, onSubmit, submitting }: Props)
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Resumen de métricas */}
-      <div className="rounded-2xl border border-slate-700 bg-slate-800/40 px-6 py-5 flex flex-wrap gap-6">
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Módulos</p>
-          <p className="text-2xl font-bold text-white">{contractC.total_modules}</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Tests</p>
-          <p className="text-2xl font-bold text-white">{contractC.total_tests}</p>
-        </div>
+      {/* Resumen de métricas — compact inline row */}
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm pb-2 border-b border-slate-800/80">
+        <span>
+          <span className="font-semibold tabular-nums text-slate-200">{contractC.total_modules}</span>
+          <span className="text-slate-500 ml-1.5">módulos</span>
+        </span>
+        <span className="text-slate-700" aria-hidden>·</span>
+        <span>
+          <span className="font-semibold tabular-nums text-slate-200">{contractC.total_tests}</span>
+          <span className="text-slate-500 ml-1.5">tests</span>
+        </span>
         {qr && (
           <>
-            <div>
-              <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Fn sobre umbral</p>
-              <p className={`text-2xl font-bold ${qr.functions_exceeding_threshold > 0 ? 'text-red-400' : 'text-green-400'}`}>
+            <span className="text-slate-700" aria-hidden>·</span>
+            <span>
+              <span className={`font-semibold tabular-nums ${qr.functions_exceeding_threshold > 0 ? 'text-red-400' : 'text-green-400'}`}>
                 {qr.functions_exceeding_threshold}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Seguridad</p>
-              <p className={`text-2xl font-bold ${qr.security_findings.length > 0 ? 'text-orange-400' : 'text-green-400'}`}>
+              </span>
+              <span className="text-slate-500 ml-1.5">fn. sobre umbral</span>
+            </span>
+            <span className="text-slate-700" aria-hidden>·</span>
+            <span>
+              <span className={`font-semibold tabular-nums ${qr.security_findings.length > 0 ? 'text-orange-400' : 'text-green-400'}`}>
                 {qr.security_findings.length}
-              </p>
-            </div>
+              </span>
+              <span className="text-slate-500 ml-1.5">hallazgos seguridad</span>
+            </span>
           </>
         )}
         {cr && (
-          <div>
-            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Branch cov.</p>
-            <p className={`text-2xl font-bold ${cr.meets_threshold ? 'text-green-400' : 'text-red-400'}`}>
-              {cr.branch_coverage_pct.toFixed(1)}%
-            </p>
-          </div>
+          <>
+            <span className="text-slate-700" aria-hidden>·</span>
+            <span>
+              <span className={`font-semibold tabular-nums ${cr.meets_threshold ? 'text-green-400' : 'text-red-400'}`}>
+                {cr.branch_coverage_pct.toFixed(1)}%
+              </span>
+              <span className="text-slate-500 ml-1.5">branch coverage</span>
+            </span>
+          </>
         )}
         {tm && (
-          <div>
-            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">CMMI L3</p>
-            <p className={`text-2xl font-bold ${tm.cmmi_l3_compliant ? 'text-green-400' : 'text-red-400'}`}>
-              {tm.cmmi_l3_compliant ? '✓' : '✗'}
-            </p>
-          </div>
+          <>
+            <span className="text-slate-700" aria-hidden>·</span>
+            <span className={`font-semibold ${tm.cmmi_l3_compliant ? 'text-green-400' : 'text-red-400'}`}>
+              CMMI L3 {tm.cmmi_l3_compliant ? '✓' : '✗'}
+            </span>
+          </>
         )}
-        <div className="ml-auto text-right">
-          <p className="text-xs text-slate-500 mb-1">Revisados</p>
-          <p className="text-2xl font-bold text-emerald-400">{n_activos}/{contractC.total_modules}</p>
-        </div>
+        <span className="ml-auto">
+          <span className="font-semibold tabular-nums text-emerald-400">{n_activos}</span>
+          <span className="text-slate-500">/{contractC.total_modules} revisados</span>
+        </span>
       </div>
 
       {/* Módulos para revisar */}
@@ -281,7 +287,7 @@ export default function CodeReviewer({ contractC, onSubmit, submitting }: Props)
         <h4 className="font-semibold text-white">Veredicto del desarrollador senior</h4>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-slate-400 uppercase tracking-wider">Identificador del revisor *</label>
+          <label className="text-sm text-slate-400">Identificador del revisor <span className="text-slate-600">*</span></label>
           <input
             type="text"
             placeholder="Ej: carlos.mendoza.senior"
@@ -292,7 +298,7 @@ export default function CodeReviewer({ contractC, onSubmit, submitting }: Props)
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-slate-400 uppercase tracking-wider">Observaciones generales</label>
+          <label className="text-sm text-slate-400">Observaciones generales</label>
           <textarea
             rows={2}
             placeholder="Notas sobre naming, design intent, cohesión, oportunidades de refactor..."
@@ -303,7 +309,7 @@ export default function CodeReviewer({ contractC, onSubmit, submitting }: Props)
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs text-slate-400 uppercase tracking-wider">Veredicto final</label>
+          <label className="text-sm text-slate-400">Veredicto final</label>
           <div className="flex flex-wrap gap-3">
             {[
               { value: 'approved',      label: 'Aprobar' },
